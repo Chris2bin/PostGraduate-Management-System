@@ -1,4 +1,10 @@
 # SoftwareEngineeringFund
 Software Engineering Fundamental Project for BoBoBoyz
 
-This is a branch update.
+This is the place for storing reference links and documents.
+
+Useful links:
+
+- Report - Week #2
+https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
+
