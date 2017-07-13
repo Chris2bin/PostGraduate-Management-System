@@ -1,9 +1,9 @@
-# SoftwareEngineeringFund
-Software Engineering Fundamental Project for BoBoBoyz
+# Software Engineering Fundamental Project
+Software Engineering Fundamental Project for team BoBoBoyz
 
-This is the place for storing reference links and documents.
+This is the place for storing reference links for tutorials and in-progress documents. Final output of code and other documents are stored in their respecitve folders.
 
-BoBoBoyz's member list, id and email:
+BoBoBoyz member's info:
 1) Ng Jing Keong (1151100169) - james0523njk@gmail.com
 2) Goh Kun Shun (1151101980) - kunshun225@gmail.com
 3) Christopher Too (1151101473) - christophertwoweibin@gmail.com
@@ -15,5 +15,5 @@ Tutorial links:
 - GitHub - https://guides.github.com/activities/hello-world/
 - Bootstrap - https://www.w3schools.com/bootstrap/default.asp
 
-Documentation links:
+Documentation links (for editing only):
 - Report Week #2 - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
