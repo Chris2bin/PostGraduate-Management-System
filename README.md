@@ -10,6 +10,9 @@ BoBoBoyz member's info:
 4) Eric Chia Teck Han (1151101246) - ericchia508@gmail.com
 5) Ong Koon Hua (1151102941) - koonhua310@gmail.com
 
+Tools to use:
+- Sublime Text 3 - https://www.sublimetext.com/
+- PyCharm - https://www.jetbrains.com/pycharm/
 
 Tutorial links:
 - GitHub - https://guides.github.com/activities/hello-world/
