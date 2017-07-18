@@ -13,10 +13,12 @@ BoBoBoyz member's info:
 Tools to use:
 - Sublime Text 3 - https://www.sublimetext.com/
 - PyCharm - https://www.jetbrains.com/pycharm/
+- Bootstrap Theme Customizer - https://www.bootstrap-live-customizer.com/
 
 Tutorial links:
 - GitHub - https://guides.github.com/activities/hello-world/
 - Bootstrap - https://www.w3schools.com/bootstrap/default.asp
+- Django - https://www.youtube.com/watch?v=qgGIqRFvFFk&index=1&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
 
 Documentation links (for editing only):
 - Report Week #2 - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
