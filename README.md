@@ -21,5 +21,5 @@ Tutorial links:
 - Django - https://pythonprogramming.net/django-web-development-with-python-intro/
 
 Documentation links (for editing only):
-- Report Week #2 - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
-- Report Week #3 - https://docs.google.com/document/d/1Gd_nE3nsRfuVFqwWzKhKpQBaagcdJS_x3GwBsWq7yEg/edit?usp=sharing
+- Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
+- Report Week #3 - Functional Requirements - https://docs.google.com/document/d/1Gd_nE3nsRfuVFqwWzKhKpQBaagcdJS_x3GwBsWq7yEg/edit?usp=sharing
