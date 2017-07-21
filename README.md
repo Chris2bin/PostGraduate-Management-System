@@ -21,6 +21,7 @@ Tutorial links:
 - Django - https://pythonprogramming.net/django-web-development-with-python-intro/
 
 Meeting Log:
+
 https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
 
 Documentation links (for editing only):
