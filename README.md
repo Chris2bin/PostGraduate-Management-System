@@ -19,6 +19,7 @@ Tutorial links:
 - GitHub - https://guides.github.com/activities/hello-world/
 - Bootstrap - https://www.w3schools.com/bootstrap/default.asp
 - Django - https://pythonprogramming.net/django-web-development-with-python-intro/
+- Django - https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
 
 Documentation links (for editing only):
 - Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
