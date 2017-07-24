@@ -16,12 +16,12 @@ Tools to use:
 - Bootstrap Theme Customizer - https://www.bootstrap-live-customizer.com/
 
 Tutorial links:
- General:
+ \nGeneral:
   - GitHub - https://guides.github.com/activities/hello-world/
-  Front End:
+  \nFront End:
   - Bootstrap - https://www.w3schools.com/bootstrap/default.asp
   - Animated Bootstrap - https://www.youtube.com/watch?v=ePgnR4gHIi4
-  Back End:
+  \nBack End:
   - Django - https://pythonprogramming.net/django-web-development-with-python-intro/
   - Django - https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
 
