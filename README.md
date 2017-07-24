@@ -26,4 +26,4 @@ Documentation links (for editing only):
 - Report Week #3 - Functional Requirements - https://docs.google.com/document/d/1Gd_nE3nsRfuVFqwWzKhKpQBaagcdJS_x3GwBsWq7yEg/edit?usp=sharing
 
 Meeting Log:
-https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
+- https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
