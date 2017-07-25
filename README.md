@@ -19,8 +19,10 @@ Tutorial links:
   - GitHub - https://guides.github.com/activities/hello-world/
   - Bootstrap - https://www.w3schools.com/bootstrap/default.asp
   - Animated Bootstrap - https://www.youtube.com/watch?v=ePgnR4gHIi4
-  - Django - https://pythonprogramming.net/django-web-development-with-python-intro/
-  - Django - https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
+  - Django (sentdex) - https://pythonprogramming.net/django-web-development-with-python-intro/
+  - Django (thenewboston) - https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
+  - Django for Model Inheritance - https://godjango.com/blog/django-abstract-base-class-model-inheritance/
+  - Django Cheat Sheet - https://github.com/xKHUNx/SoftwareEngineeringFund/blob/master/Documents/Django%20Cheat%20Sheet.txt
 
 Documentation links (for editing only):
 - Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
