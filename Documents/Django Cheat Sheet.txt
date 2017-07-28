@@ -18,6 +18,9 @@ python manage.py sqlmigrate [APP_NAME] 0001
 
 
 // Database API
+# Use this when in doubt
+python manage.py migrate --run-syncdb
+
 # Go to Django shell
 python manage.py shell
 
