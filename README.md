@@ -28,7 +28,7 @@ Tutorial links:
 Documentation links (for editing only):
 - Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
 - Report Week #3 - Functional Requirements - https://docs.google.com/document/d/1pIBPGakxoJX79tYrFZhPhfivgcfQFZOPbk4hYH2ti2U/edit?usp=sharing
-- Diagrams - https://drive.google.com/open?id=0B8EYxKwwWxkdZXdOaVpTNTNRQ1U
+- Diagrams - https://drive.google.com/drive/folders/0BwCgktBwb0DDendlV2pPbHoyd3M?usp=sharing
 
 Meeting Log:
 - https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
