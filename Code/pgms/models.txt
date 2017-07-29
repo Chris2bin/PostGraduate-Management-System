@@ -1,0 +1,86 @@
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.conf import settings
+
+# Extending FloatField with min_value and max_value
+class MinMaxFloat(models.FloatField):
+    def __init__(self, min_value=None, max_value=None, *args, **kwargs):
+        self.min_value, self.max_value = min_value, max_value
+        super(MinMaxFloat, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {'min_value': self.min_value, 'max_value' : self.max_value}
+        defaults.update(kwargs)
+        return super(MinMaxFloat, self).formfield(**defaults)
+
+# Extending abstract user class
+class User(AbstractUser):
+
+    # Choices（check constraint)
+    # Gender
+    FEMALE = 'F'
+    MALE = 'M'
+    GENDER = (
+        (FEMALE, 'Female'),
+        (MALE, 'Male'),
+    )
+    # User Type
+    ADMIN = 'A'
+    SUPERVISOR = 'S'
+    BY_RESEARCH = 'R'
+    BY_COURSEWORK = 'C'
+    TYPE = (
+        (ADMIN, 'Admin'),
+        (SUPERVISOR, 'Supervisor'),
+        (BY_RESEARCH, 'By Research'),
+        (BY_COURSEWORK, 'By Coursework'),
+    )
+    # Attributes
+    user_dob = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
+    user_gender = models.CharField(max_length=1, choices=GENDER, verbose_name="Gender")
+    user_address = models.TextField(max_length=500, verbose_name="Address")
+    user_photo = models.FileField(default='', verbose_name="Photo")
+    user_type = models.CharField(max_length=1, choices=TYPE, verbose_name="User Type")
+
+class ByResearch(User):
+
+    class Meta:
+        verbose_name = 'Research Student'
+
+    # User Status
+    ACTIVE = 'A'
+    TERMINATED = 'T'
+    GRADUATED ='G'
+    STATUS = (
+        (ACTIVE, 'Active'),
+        (TERMINATED, 'Terminated'),
+        (GRADUATED, 'Graduated'),
+    )
+    #Progress status
+    PROGRESS =(())
+    # Attributes
+    user_status = models.CharField(max_length=1, choices=STATUS, verbose_name="Student Status")
+    user_feesOwed = models.FloatField()
+    br_title = models.CharField(max_length=100, verbose_name="Research Title", unique=True)
+    br_progress = models.CharField(max_length=1, choices=PROGRESS, verbose_name="Research Progress")
+
+class ByCoursework(User):
+
+    class Meta:
+        verbose_name = 'Coursework Student'
+
+    # User Status
+    ACTIVE = 'A'
+    TERMINATED = 'T'
+    GRADUATED ='G'
+    STATUS = (
+        (ACTIVE, 'Active'),
+        (TERMINATED, 'Terminated'),
+        (GRADUATED, 'Graduated'),
+    )
+    #Progress status
+    PROGRESS =(())
+    # Attributes
+    user_status = models.CharField(max_length=1, choices=PROGRESS, verbose_name="Student Status")
+    user_feesOwed = models.FloatField()
+    bc_cgpa = MinMaxFloat(min_value=0.0, max_value=4.0)
