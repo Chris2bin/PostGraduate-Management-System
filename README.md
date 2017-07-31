@@ -23,7 +23,7 @@ Tutorial links:
   - Django (sentdex) - https://pythonprogramming.net/django-web-development-with-python-intro/
   - Django (thenewboston) - https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK
   - Django for Model Inheritance - https://godjango.com/blog/django-abstract-base-class-model-inheritance/
-  - Django Cheat Sheet - https://github.com/xKHUNx/SoftwareEngineeringFund/blob/master/Documents/Django%20Cheat%20Sheet.txt
+  - Django Cheat Sheet - https://github.com/xKHUNx/SoftwareEngineeringFund/blob/khun/Documents/Django%20Cheat%20Sheet.md
   - Django Extending User Model - https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
   - Django Reference Book -https://drive.google.com/file/d/0BzYEoMfUzVksZHBCanFEVm5CUm8/view
 
