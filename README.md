@@ -26,6 +26,7 @@ Tutorial links:
   - Django Cheat Sheet - https://github.com/xKHUNx/SoftwareEngineeringFund/blob/khun/Documents/Django%20Cheat%20Sheet.md
   - Django Extending User Model - https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html
   - Django Reference Book -https://drive.google.com/file/d/0BzYEoMfUzVksZHBCanFEVm5CUm8/view
+  - Django Testing on Mobile - http://davidwilson.me/2013/08/18/Testing-Django-on-mobile-device-locally.html
 
 Documentation links (for editing only):
 - Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
