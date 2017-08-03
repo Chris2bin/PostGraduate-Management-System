@@ -10,6 +10,10 @@ BoBoBoyz member's info:
 4) Eric Chia Teck Han (1151101246) - ericchia508@gmail.com
 5) Ong Koon Hua (1151102941) - koonhua310@gmail.com
 
+Version:
+- Django    - 1.11.3
+- Bootstrap - 3.3.7
+
 Tools to use:
 - Sublime Text 3 - https://www.sublimetext.com/
 - PyCharm - https://www.jetbrains.com/pycharm/
