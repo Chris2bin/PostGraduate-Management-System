@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Home - {{ profile.user.username }}</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Profile:home' %}">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
+                </div>
+                <button type="submit" class="btn btn-default">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">
+            <h1>        <strong>Name: </strong>{{ profile.user.username }}</h1>
+            <h3>   <strong>User Type: </strong>{{ profile.user_type }}</h3>
+            {% if profile.user_type == 2 %}
+                <h3><strong>Student Type: </strong>{{ profile.stud_type }}</h3>
+            {% endif %}
+             <a href="/logout" class="btn btn-info" role="button">Log Out</a>
+        </div>
+        <div class="col-sm-10">
+            {% if all_profiles %}
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>User Type</th>
+                                </tr>
+                            </thead>
+                         <tbody>
+                            {% for p in all_profiles %}
+                                <tr>
+                                    <td>{{ p.user.username }}</td>
+                                    <td>{{ p.user_type }}</td>
+                                </tr>
+                            {% endfor %}
+                         </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+
+</div>
+{% endblock %}

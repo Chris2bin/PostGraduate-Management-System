@@ -1,0 +1,16 @@
+{% block body %}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <h3 class="col-sm-2">
+            <h1>        Name: {{ profile.user.username }}</h1>
+            <h3>   User Type: {{ profile.user_type }}</h3>
+            {% if profile.user_type == 2 %}
+                <h3>Student Type: {{ profile.stud_type }}</h3>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
