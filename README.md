@@ -34,6 +34,7 @@ Documentation links (for editing only):
 - Report Week #3 - Functional Requirements - https://docs.google.com/document/d/1pIBPGakxoJX79tYrFZhPhfivgcfQFZOPbk4hYH2ti2U/edit?usp=sharing
 - Diagrams Week #4 - https://drive.google.com/drive/folders/0BwCgktBwb0DDendlV2pPbHoyd3M?usp=sharing
 - Quality Requirements Week #5 - https://docs.google.com/document/d/16tPCvqsoHLakRtS0MjdmClrVqpgsN1vepFG9e78d39k/edit?usp=sharing
+- Sequence Diagram - https://drive.google.com/file/d/0BzYEoMfUzVksSGUyRThIdVo4MzQ/view?usp=sharing
 
 Meeting Log:
 - https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
