@@ -28,6 +28,8 @@ Tutorial links:
   - Django Reference Book -https://drive.google.com/file/d/0BzYEoMfUzVksZHBCanFEVm5CUm8/view
   - Django Testing on Mobile - http://davidwilson.me/2013/08/18/Testing-Django-on-mobile-device-locally.html
   - Dot Check Progress Bar - https://codepen.io/BuddyLReno/pen/NNojRP
+  - SD reference #1 - http://www.cs.sjsu.edu/~pearce/modules/lectures/ooa/analysis/ecb.htm
+  - SD reference #2 - http://epf.eclipse.org/wikis/openuppt/openup_basic/guidances/concepts/entity_control_boundary_pattern,_uF-QYEAhEdq_UJTvM1DM2Q.html
 
 Documentation links (for editing only):
 - Report Week #2 - Project Plan - https://docs.google.com/document/d/1yTyVcEgldYESLoO3nTFKwdbn0Fpc1Q1nxCUac6CS_I4/edit?usp=sharing
