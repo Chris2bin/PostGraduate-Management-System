@@ -40,3 +40,6 @@ Documentation links (for editing only):
 
 Meeting Log:
 - https://docs.google.com/document/d/19ugqKT_JdPDCz5p1vN3mu2cE13DLMjgUKVE_TDUR-aw/edit
+
+Google Drive Folder:
+- https://drive.google.com/drive/u/0/folders/0B8EYxKwwWxkdZXdOaVpTNTNRQ1U
