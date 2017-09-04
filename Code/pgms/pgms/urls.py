@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+import sys
+sys.path.append('../')
+from Profile import views
 
 urlpatterns = [
+	url(r'^admin/logout/$', views.logout_user, name='logout_user'),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('Profile.urls')),
 ]

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 # Extending FloatField with min_value and max_value
 class MinMaxFloat(models.FloatField):
@@ -36,6 +37,9 @@ class BaseProfile(models.Model):
     def __str__(self):
         return "{} - {}".format(self.user, self.user_type or "")
 
+
+    def get_absolute_url(self):
+        return reverse('Profile:profile', kwargs={'username': self.user__username})
 
     class Meta:
         abstract = True

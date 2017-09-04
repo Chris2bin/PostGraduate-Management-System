@@ -1,0 +1,360 @@
+body{
+	background:#ccd0d1;
+}
+.container{
+	margin-top: 20px;
+}
+.navbar{
+	border-radius:0;
+}
+.navbar-brand{
+	font-family: 'Satisfy',cursive;
+
+}
+.navbar-inverse {
+	background-color: rgba(00,00,00,0.9);
+	border-color: black;
+	border-radius:0;
+}
+.navbar-inverse .navbar-brand{
+	color: white;
+	font-weight: 200;
+    letter-spacing: 1px;
+}
+.navbar-inverse .navbar-brand:hover{
+	color: white;
+}
+@media (max-width: 600px) {
+  .navbar-header {
+      float: none;
+  }
+  .navbar-left,.navbar-right {
+      float: none !important;
+  }
+  .navbar-toggle {
+      display: block;
+  }
+  .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+      top: 0;
+      border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+      display: none!important;
+  }
+  .navbar-nav {
+      float: none!important;
+      margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+      float: none;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .collapse.in{
+      display:block !important;
+  }
+}
+.profile{
+	margin:1px 0;
+}
+.profile-sidebar{
+	padding: 20px 0 10px 0;
+	background:white;
+  margin-top:50px;
+  margin-left:30px;
+  min-width: 200px;
+  min-height: 400px;
+}
+.profile-userpic img{
+	float: none;
+	margin:0 auto;
+	width:100%;
+	height:100%;
+  border-radius:3px;
+	
+}
+.profile-usertitle{
+	text-align:center;
+	margin-top:7px;
+
+}
+.profile-usertitle-name{
+	color:black;
+	font-size:16px;
+	font-weight:600;
+	margin-bottom:7px;
+}
+.profile-usertitle-course{
+	color:black;
+	font-size:12px;
+	font-weight:600;
+	margin-bottom:15px;
+}
+.profile-usermenu {
+	margin-top:20px;
+}
+.profile ul li{
+	border-bottom:1px solid #f0f4f7;
+}
+.profile ul li:last-child{
+	border-bottom: none;
+}
+.profile ul li a{
+	color:#93a3b5;
+	font-size:12px;
+	font-weight:400;
+}
+.profile ul li a span{
+	margin-right:8px;
+	font-size:14px;
+}
+
+.profile ul li a:hover{
+	background-color:#cfe8fa;
+	color:#5b9bd1;
+	border-left: 2px solid #5b9bd1;
+	margin-left: -2px;
+}
+.profile ul li.active{
+	border-bottom:none;
+}
+.profile ul li.active a{
+	color:#5b9bd1;
+	background-color:#cfe8fa;
+	border-left: 2px solid #5b9bd1;
+	margin-left: -2px;
+}
+.profile-content-head{
+  margin-top:50px;
+	background:#fff;
+	min-height:580px auto;
+  margin-right:20px;
+  padding :20px;
+}
+.profile-content{
+  padding :20px;
+  background:#fff;
+  min-height:460px;
+  margin-top:30px;
+  margin-right:20px;
+}
+.form-profile{
+  margin-top:50px;
+	padding:20px;
+	background:rgba(255,255,255,1);
+	min-height:500px;
+	margin-bottom:30px;
+}
+.btn.btn-save {
+    color:#93a3b5;
+}
+.btn.btn-save:hover {
+      color:#5b9bd1;
+	  background-color:#cfe8fa;
+}
+.modal-content{
+	min-height:auto;
+}
+
+/*Drop drop control start form here!*/
+.navbar-inverse .dropdown-menu {
+  min-width: 330px;
+  background-color: #fff;
+  min-height: 500px;
+  max-height: 500px;
+}
+.navbar-inverse .notify-drop-title {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 5px 15px 10px 15px;
+}
+.navbar-inverse .drop-content {
+  min-height: 420px;
+  max-height: 420px;
+  overflow-y: scroll;
+}
+.navbar-inverse .drop-content::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+.navbar-inverse .drop-content::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+.navbar-inverse .drop-content::-webkit-scrollbar-thumb
+{
+  background-color: #ccc;
+}
+.navbar-inverse .drop-content > li {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 10px 5px;
+}
+
+.navbar-inverse .drop-content > li:after {
+  content: "";
+  clear: both;
+  display: block;
+}
+.navbar-inverse .drop-content > li:hover {
+  background-color: #fcfcfc;
+}
+.navbar-inverse .drop-content > li:last-child {
+  border-bottom: none;
+}
+.notify-img img{
+  float: left;
+  display: inline-block;
+  width: 45px;
+  height: 45px;
+  margin: 0px 0px 8px 0px;
+}
+.notify1-img img{
+  float: left;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  margin: 0px 0px 8px 0px;
+}
+.rIcon {
+  float: right;
+  color: #999;
+}
+.rIcon:hover {
+  color: #333;
+}
+.drop-content > li a {
+  font-size: 12px;
+  font-weight: normal;
+}
+.drop-content > li {
+  font-weight: bold;
+  font-size: 11px;
+}
+.drop-content > li hr {
+  margin: 5px 0;
+  width: 70%;
+  border-color: rgba(00,00,00,0.9);
+}
+.drop-content .pd-l0 {
+  padding-left: 0;
+}
+.drop-content > li p {
+  font-size: 11px;
+  color: #666;
+  font-weight: normal;
+  margin: 3px 0;
+}
+.navbar-inverse .drop-content > li p.time {
+  font-size: 12px;
+  font-weight: 600px;
+  top: -6px;
+  margin-top: 8px;
+  padding: 3px;
+  border: 1px solid #e2e2e2;
+  position: relative;
+  background-image: linear-gradient(#fff,#f2f2f2);
+  display: inline-block;
+  border-radius: 2px;
+  color: blue;
+}
+
+.notify-drop-footer {
+  border-top: 1px solid #e2e2e2;
+  bottom: 0;
+  position: relative;
+  padding: 8px 15px;
+}
+.notify-drop-footer a {
+  color: #777;
+  text-decoration: none;
+}
+.notify-drop-footer a:hover {
+  color: #333;
+}
+/*End of notification format ! */
+
+
+
+.btn-danger{
+  border-radius: 2px;
+
+}
+.btn-primary{
+  border-radius: 2px;
+  margin-right: 5px;
+}
+.badge-danger {
+  background-color: red ;
+}
+
+/*collapse side scroll*/
+.collapse.navbar-collapse{
+  min-height: auto;
+  max-height: 1200px;
+}
+.collapse.navbar-collapse::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+.collapse.navbar-collapse::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+}
+
+.collapse.navbar-collapse::-webkit-scrollbar-thumb
+{
+  background-color: #ccc;
+}
+.collapse.navbar-collapse > li {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 10px 5px;
+}
+/*collapse side scroll end*/
+
+.table-responsive::-webkit-scrollbar-track
+{
+  background-color: #F5F5F5;
+}
+
+.table-responsive::-webkit-scrollbar
+{
+  width: 1px;
+  background-color: #F5F5F5;
+}
+
+.table-responsive::-webkit-scrollbar-thumb
+{
+  background-color: #ccc;
+}
+.table-responsive > li {
+  border-bottom: 1px solid #e2e2e2;
+  padding: 1px 1px;
+}
+
+.btn-notification{
+  color: white;
+}
+.profile-view-image img{
+  max-width: 150px;
+  max-height: 150px;
+}
+.GG{
+  margin-top: -5px;
+}
+
+.btn-userpic{
+  background-color: rgba(255,255,255,0);
+  border: 1px solid  rgba(255,255,255,0);
+  height:75%;
+  width:60%;
+}

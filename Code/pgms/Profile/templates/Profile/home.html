@@ -1,59 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Home - {{ profile.user.username }}</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
+{% extends 'Profile/navigation_bar.html' %}
 {% block body %}
-
+{% load staticfiles %}
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <form class="navbar-form navbar-left" role="search" method="get" action="{% url 'Profile:home' %}">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
-                </div>
-                <button type="submit" class="btn btn-default">Search</button>
-            </form>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-2">
-            <h1>        <strong>Name: </strong>{{ profile.user.username }}</h1>
-            <h3>   <strong>User Type: </strong>{{ profile.user_type }}</h3>
-            {% if profile.user_type == 2 %}
-                <h3><strong>Student Type: </strong>{{ profile.stud_type }}</h3>
-            {% endif %}
-             <a href="/logout" class="btn btn-info" role="button">Log Out</a>
-        </div>
-        <div class="col-sm-10">
-            {% if all_profiles %}
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>User Type</th>
-                                </tr>
-                            </thead>
-                         <tbody>
-                            {% for p in all_profiles %}
-                                <tr>
-                                    <td>{{ p.user.username }}</td>
-                                    <td>{{ p.user_type }}</td>
-                                </tr>
-                            {% endfor %}
-                         </tbody>
-                    </table>
-                </div>
-            {% endif %}
-        </div>
+	<div class="row profile">
+		<div class="col-md-4 col-sm-4 hidden-xs ">
+			<div class="profile-sidebar col-md-3 col-sm-3" id="profile-sidebar">
+				<!--profile picture-->
+				<div class="profile-userpic">
+					<center><button type="button" class="btn btn-userpic"><img src="{% static 'Profile/image/ChrisXDD.jpg' %}" class="img-responsive" alt=""></button></center>
+				</div>
+				<!--End of profile picture-->
+				<!--sidebar user infor-->
+				<div class="profile-usertitle">
+					<div class = "profie-usertitle-name">
+						{{ profile.user.first_name }} {{ profile.user.last_name }}
+					</div>
+					<div class = "profile-usertitle-id">
+						{{ profile.user.username }}
+					</div>
+					<div class = "profile-usertitle-course">
+						{{ profile.user_type }}
+						{% if profile.user_type == 'Student' %}
+							({{ profile.stud_type }})
+						{% endif %}
+					</div>
+				</div>
+				<div class="profile-usermenu">
+					<ul class = "nav navbar-fixed-left">
+						<li class = "active">
+							<a href="Home.html">
+							<span class= "glyphicon glyphicon-home"></span>
+							Home</a>
+						</li>
+						<li class = "">
+							<a href="Profile.html">
+							<span class= "glyphicon glyphicon-user"></span>
+							Profile</a>
+						</li>
+						<li class = "">
+							<a href="Subject.html">
+							<span class= "glyphicon glyphicon-education"></span>
+							Subject</a>
+						</li>
+						<li class = "">
+							<a href="File.html">
+							<span class= "glyphicon glyphicon-tasks"></span>
+							File</a>
+						</li>
+						<li class="">
+							<a href="AccountInquriy.html">
+							<span class= "glyphicon glyphicon-stats"></span>
+							Finance</a>
+						</li>
+					</ul>
+				</div>
+				<!--End Menu-->
+
+			</div>
+		</div>
+
+		<div class="col-md-8 col-sm-8 col-xs-12">
+			<div class="profile-content-head visible-xs">
+				<div class="profile-userpic">
+						<center><button type="button" class="btn btn-userpic"><img src="{% static 'Profile/image/ChrisXDD.jpg' %}" class="img-responsive" alt=""></button></center>
+				</div>
+				<div class="profile-usertitle ">
+					<div class = "profie-usertitle-name">
+						{{ profile.user.firstname }} {{ profile.user.lastname }}
+					</div>
+					<div class = "profile-usertitle-id">
+						{{ profile.user.username }}
+					</div>
+					<div class = "profile-usertitle-course">
+						Postgraduate of research (Part-time)
+					</div>
+					<div class = "profile-usertitle-course">
+						Postgraduate of research (Part-time)
+					</div>
+				</div>
+			</div>
+			<div class="profile-content-head">
+				Some user related content is here keke
+			</div>
+		</div>
+	</div>
 
 </div>
+
+<script>
+    $('.dropdown-menu').click(function(e) {
+    e.stopPropagation();
+    });
+    $('#profile-sidebar').affix({
+    	offset: {
+        top: $('#scroll').height()
+    }
+	});
+</script>
+
 {% endblock %}
