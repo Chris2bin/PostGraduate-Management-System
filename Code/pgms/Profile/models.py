@@ -66,7 +66,7 @@ class Students(models.Model):
         ('Viva voce', 'Viva voce'),
     )
     # Attributes
-    user_status = models.CharField(choices=STATUS, verbose_name="Academic Status", blank=True, null=True, max_length=10)
+    user_status = models.CharField(choices=STATUS, verbose_name="Academic Status", default='Active', max_length=10)
     user_feesOwed = models.FloatField(verbose_name="Outstanding Payment", default=0)
     stud_type = models.CharField(choices=STUDENT_TYPE, verbose_name="Student Type", blank=True, null=True, max_length=13)
     br_title = models.CharField(max_length=100, verbose_name="Research Title", unique=True, null=True, blank=True)

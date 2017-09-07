@@ -14,9 +14,9 @@ def login_user(request):
         password = request.POST['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            if user.is_active:
-                login(request, user)
-                profile = Profile.objects.get(pk=request.user.id)
+            login(request, user)
+            profile = Profile.objects.get(pk=request.user.id)
+            if profile.user_status == 'Active':
                 if profile.user_type == 'Admin':
                     return redirect('/admin/', context_instance=RequestContext(request))
                 else:
@@ -25,7 +25,8 @@ def login_user(request):
                 return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'Profile/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'Profile/login.html')
+    else:
+        return render(request, 'Profile/login.html')
 
 def logout_user(request):
     logout(request)
