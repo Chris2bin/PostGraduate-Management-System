@@ -1,0 +1,44 @@
+<h1>Make Appointment</h1>
+
+<style>
+    table, th, td{
+    border: 1px solid black;
+    }
+</style>
+
+<div class="albums-container container-fluid">
+    {% if all_appointments %}
+        <h3>here are all my appointments:</h3>
+
+        <table style="width:100%">
+          <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Lec's Name</th>
+            <th>Status</th>
+            <th>Cancel Booking</th>
+          </tr>
+        {% for appointment in all_appointments %}
+            <tr>
+            <td>{{ appointment.date }}</td>
+            <td>{{ appointment.time }}</td>
+            <td>{{ appointment.lecID }}</td>
+            <td>{{ appointment.status }}</td>
+            <th><button type="button">Cancel</button></th>
+          </tr>
+        {% endfor %}
+        </table><br/>
+
+        <button type="button"><a href="{% url 'Appointment:make_appointment' %}">Add Appointment</a></button>
+
+
+    {% endif %}
+</div>
+
+{% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<!-- <form action="{% url 'Appointment:booking' %}" method="post">
+
+</form> -->
