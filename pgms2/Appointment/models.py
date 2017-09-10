@@ -19,5 +19,6 @@ class Appointment(models.Model):
     date = models.DateField(auto_now_add=False)
     time = models.TimeField(auto_now_add=False)
     status = models.CharField(max_length=7, choices=Choices, default='Pending')
+    reason = models.CharField(max_length=200)
     lecID = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='lecID')
     stuID = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='stuID')

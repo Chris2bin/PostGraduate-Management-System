@@ -18,6 +18,7 @@ def make_appointment(request):
         appointment = form.save(commit=False)
         appointment.date = form.cleaned_data.get("date")
         appointment.time = form.cleaned_data.get("time")
+        appointment.reason = form.cleaned_data.get("reason")
         appointment.stuID = form.cleaned_data.get("stuID")
         appointment.lecID = form.cleaned_data.get("lecID")
         appointment.save()
