@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+
+<html lang="en-us" >
+<head>
+<title>Add appointment | Django site admin</title>
+<link rel="stylesheet" type="text/css" href="/static/admin/css/base.css" />
+<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+
+
+<script type="text/javascript" src="/admin/jsi18n/"></script>
+<script type="text/javascript" src="/static/admin/js/core.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+<script type="text/javascript" src="/static/admin/js/actions.js"></script>
+<script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+<script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+<script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+
+<meta name="robots" content="NONE,NOARCHIVE" />
+</head>
+
+
+<body class=" app-Appointment model-appointment change-form"
+  data-admin-utc-offset="0">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        
+<h1 id="site-name"><a href="/admin/">Django administration</a></h1>
+
+        </div>
+        
+        
+        <div id="user-tools">
+            
+                Welcome,
+                <strong>admin</strong>.
+            
+            
+                
+                    <a href="/">View site</a> /
+                
+                
+                    
+                    
+                
+                
+                <a href="/admin/password_change/">Change password</a> /
+                
+                <a href="/admin/logout/">Log out</a>
+            
+        </div>
+        
+        
+        
+    </div>
+    <!-- END Header -->
+    
+<div class="breadcrumbs">
+<a href="/admin/">Home</a>
+&rsaquo; <a href="/admin/Appointment/">Appointment</a>
+&rsaquo; <a href="/admin/Appointment/appointment/">Appointments</a>
+&rsaquo; Add appointment
+</div>
+
+    
+
+    
+        
+    
+
+    <!-- Content -->
+    <div id="content" class="colM">
+        
+        <h1>Add appointment</h1>
+        <div id="content-main">
+
+
+
+<form enctype="multipart/form-data" action="" method="post" id="appointment_form" novalidate><input type='hidden' name='csrfmiddlewaretoken' value='xzH3vNE1lRL29DnwCfPeTXm06qnfGlvoEOPPU8bCg4XMM14r9sdEMTBBv00WMqFh' />
+<div>
+
+
+
+
+
+
+
+  <fieldset class="module aligned ">
+    
+    
+    
+        <div class="form-row field-created_at">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_created_at_0">Created at:</label>
+                        
+                            <p class="datetime">
+  Date: <input type="text" name="created_at_0" class="vDateField" size="10" required id="id_created_at_0" />
+
+<br />
+  Time: <input type="text" name="created_at_1" class="vTimeField" size="8" required id="id_created_at_1" />
+
+
+</p>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-status">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_status">Status:</label>
+                        
+                            <select name="status" id="id_status">
+  <option value="Approve">Approve</option>
+
+  <option value="Reject">Reject</option>
+
+  <option value="Pending" selected>Pending</option>
+
+</select>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-lecID">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_lecID">LecID:</label>
+                        
+                            <div class="related-widget-wrapper">
+    <select name="lecID" required id="id_lecID">
+  <option value="" selected>---------</option>
+
+  <option value="1">admin</option>
+
+  <option value="2">idiot</option>
+
+  <option value="3">supervisor</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_lecID"
+            data-href-template="/admin/auth/user/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="Change selected user"><img src="/static/admin/img/icon-changelink.svg" alt="Change"/></a><a class="related-widget-wrapper-link add-related" id="add_id_lecID"
+            href="/admin/auth/user/add/?_to_field=id&amp;_popup=1"
+            title="Add another user"><img src="/static/admin/img/icon-addlink.svg" alt="Add"/></a>
+    
+</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+        <div class="form-row field-stuID">
+            
+            
+                <div>
+                    
+                    
+                        <label class="required" for="id_stuID">StuID:</label>
+                        
+                            <div class="related-widget-wrapper">
+    <select name="stuID" required id="id_stuID">
+  <option value="" selected>---------</option>
+
+  <option value="1">admin</option>
+
+  <option value="2">idiot</option>
+
+  <option value="3">supervisor</option>
+
+</select>
+    
+        <a class="related-widget-wrapper-link change-related" id="change_id_stuID"
+            data-href-template="/admin/auth/user/__fk__/change/?_to_field=id&amp;_popup=1"
+            title="Change selected user"><img src="/static/admin/img/icon-changelink.svg" alt="Change"/></a><a class="related-widget-wrapper-link add-related" id="add_id_stuID"
+            href="/admin/auth/user/add/?_to_field=id&amp;_popup=1"
+            title="Add another user"><img src="/static/admin/img/icon-addlink.svg" alt="Add"/></a>
+    
+</div>
+                        
+                    
+                    
+                </div>
+            
+        </div>
+    
+</fieldset>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="submit-row">
+<input type="submit" value="Save" class="default" name="_save" />
+
+
+<input type="submit" value="Save and add another" name="_addanother" />
+<input type="submit" value="Save and continue editing" name="_continue" />
+</div>
+
+
+
+    <script type="text/javascript"
+            id="django-admin-form-add-constants"
+            src="/static/admin/js/change_form.js"
+            
+                data-model-name="appointment"
+            >
+    </script>
+
+
+
+
+<script type="text/javascript"
+        id="django-admin-prepopulated-fields-constants"
+        src="/static/admin/js/prepopulate_init.js"
+        data-prepopulated-fields="[]">
+</script>
+
+
+</div>
+</form></div>
+
+        
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+
+</body>
+</html>
