@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BoBoBoyz</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load staticfiles %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="icon" href="Penguin.png" type="image/png"/>
+  <link rel="stylesheet" type="text/css" href="{% static 'Transaction/css/style.css' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class = "container-fluid">
+		<!--logo-->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle = "collapse" data-target="#topNavBar">
+				<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+			</button>
+			<a class = "navbar-brand active" href="Home.html">BoboBoyz</a>
+				<div class="btn-nav pull-right visible-xs">
+		          <a href="#" class="btn btn-notification navbar-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge badge-danger">5</span>
+		          </a>
+		          <ul class="dropdown-menu ">
+		            <div class="notify-drop-title">
+		            	<div class="row">
+		                    <!--inside 1-->
+		            		<div class="col-md-6 col-sm-6 col-xs-6">Notification</div>
+		            	</div>
+		            </div>
+		            <!-- end notify title -->
+		            <!-- notify content -->
+		            <div class="drop-content">
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">James Ng</a><a href="" class="rIcon"><i class=""></i></a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Eric Chia</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Christoper Too</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Alex Chan</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Joker Xue</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            </div>
+		            <div class="notify-drop-footer text-center">
+		            	<a href="">See All</a>
+		            </div>
+		          </ul>
+		    </div>
+		</div>
+
+		<!--Item-->
+		<div class= "collapse navbar-collapse" id="topNavBar">
+				<ul class = "nav navbar-nav visible-xs">
+						<li class = "">
+							<a href="Home.html">
+							<span class= "glyphicon glyphicon-home"></span>
+							Home</a>
+						</li>
+						<li class = "active">
+							<a href="Profile.html">
+							<span class= "glyphicon glyphicon-user"></span>
+							Profile</a>
+						</li>
+						<li class = "">
+							<a href="Subject.html">
+							<span class= "glyphicon glyphicon-education"></span>
+							Subject</a>
+						</li>
+						<li class = "">
+							<a href="File.html">
+							<span class= "glyphicon glyphicon-tasks"></span>
+							File</a>
+						</li>
+						<li class="">
+							<a href="AccountInquriy.html">
+							<span class= "glyphicon glyphicon-stats"></span>
+							Finance</a>
+						</li>
+				</ul>
+			    <ul class="nav navbar-nav navbar-right">
+		         <li class="dropdown hidden-xs">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span>Notification <span class="badge badge-danger">5</span>
+		          </a>
+		          <ul class="dropdown-menu ">
+		            <div class="notify-drop-title">
+		            	<div class="row">
+		                    <!--inside 1-->
+		            		<div class="col-md-6 col-sm-6 col-xs-6">Notification</div>
+		            	</div>
+		            </div>
+		            <!-- end notify title -->
+		            <!-- notify content -->
+		            <div class="drop-content">
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">James Ng</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Eric Chia</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Christoper Too</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Alex Chan</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            	<li>
+		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
+		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">Joker Xue</a>
+		                        <div>
+		                    		<p>Date</p>
+		                            <p>Time</p>
+		                            <p>About</p>
+		                            <button type="button" class="btn btn-danger pull-right">Reject</button>
+		                            <button type="button" class="btn btn-primary pull-right">Accept</button>
+		                        </div>
+		            		</div>
+		            	</li>
+		            </div>
+		            <div class="notify-drop-footer text-center">
+		            	<a href="">See All</a>
+		            </div>
+		          </ul>
+		        </li>
+
+				<li class="">
+						<a href="LogInPage.html" >
+							<span class= "glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp; Logout
+						</a>
+				</li>
+			</ul>
+			<form class="navbar-form navbar-right" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Search" name="q">
+					<div class="input-group-btn">
+						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</nav>
+
+
+<div class="container-fluid">
+	<div class="row profile">
+		<div class="col-md-4 col-sm-4 hidden-xs ">
+			<div class="profile-sidebar scrollspy col-md-3 col-sm-3" id="profile-sidebar">
+				<!--profile picture-->
+				<div class="profile-userpic">
+					<center><button type="button" class="btn btn-userpic"><img src="ChrisXDD.jpg" class="img-responsive" alt=""></button></center>
+				</div>
+				<!--End of profile picture-->
+				<!--sidebar user infor-->
+				<div class="profile-usertitle">
+					<div class = "profie-usertitle-name">
+						Ong Koon Hua
+					</div>
+					<div class = "profile-usertitle-id">
+						1151102941
+					</div>
+					<div class = "profile-usertitle-course">
+						Postgraduate of research (Part-time)
+					</div>
+				</div>
+				<div class="profile-usermenu">
+					<ul class = "nav navbar-fixed-left">
+						<li class = "active">
+							<a href="Home.html">
+							<span class= "glyphicon glyphicon-home"></span>
+							Home</a>
+						</li>
+						<li class = "">
+							<a href="Profile.html">
+							<span class= "glyphicon glyphicon-user"></span>
+							Profile</a>
+						</li>
+						<li class = "">
+							<a href="Subject.html">
+							<span class= "glyphicon glyphicon-education"></span>
+							Subject</a>
+						</li>
+						<li class = "">
+							<a href="File.html">
+							<span class= "glyphicon glyphicon-tasks"></span>
+							File</a>
+						</li>
+						<li class="">
+							<a href="AccountInquriy.html">
+							<span class= "glyphicon glyphicon-stats"></span>
+							Finance</a>
+						</li>
+					</ul>
+				</div>
+				<!--End Menu-->
+
+			</div>
+		</div>
+
+		<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="form-profile">
+						<form>
+							<h1>Finance</h1>
+							<h3>The total payment amount is : RM 5,008.40 </h3>
+							<div class="table-responsive">
+							<table class="table">
+							    <thead>
+							      	<tr>
+							        	<th>File / Picture </th>
+							        	<th>Date Uploaded</th>
+									  	<th>Reference No.</th>
+							        	<th>View</th>
+							      	</tr>
+							    </thead>
+							    <tbody>
+							      	{% for Trasaction in all_account %}
+										<tr>
+											<td>{{ Trasaction.Tran_File }}</td>
+											<td>{{ Trasaction.Date_uploaded }}</td>
+											<td>{{ Trasaction.Tran_RefNo }}</td>
+											<td><button type="button" class = "btn btn-default" data-toggle="modal" data-target="#Modal1">View</button></td>
+								  		</tr>
+									{% endfor %}
+
+							    </tbody>
+							</table>
+							</div>
+							<div class = "text-right">
+							  <button type="button" class = "btn btn-default" data-toggle="modal" data-target="#Modal">Upload File</button>
+							  </div>
+						</form>
+					</div>
+					  <!-- Modal -->
+					  <div class="modal fade" id="Modal" role="dialog">
+					    <div class="modal-dialog">
+
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">Submition of receipt </h4>
+					        </div>
+					        <div class="modal-body">
+					        	<form class="form-horizontal" role="form">
+					        	  <div>
+						          	<p>Maximum upload file size: 2MB.</p>
+								  	<p>File type : pdf, jpg , png</p>
+					        	  </div>
+					        	  <div class="">
+					        	  	<button type="button" class=" btn btn-primary" >Choose</button>
+					        	  </div>
+		                  		  <div class="form-group">
+							        <label  class="col-sm-4 control-label" for=""> Receipt Number :</label>
+		                    			<div class="col-sm-7">
+		                        			<input type="input" class="form-control" id="" placeholder="">
+		                    			</div>
+		                  		  </div>
+					         	</form>
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-primary" >Submit</button>
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+
+					    </div>
+					  </div>
+					  <div class="modal fade" id="Modal1" role="dialog">
+					    <div class="modal-dialog">
+
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					          <button type="button" class="close" data-dismiss="modal">&times;</button>
+					          <h4 class="modal-title">View of receipt </h4>
+					        </div>
+					        <div class="modal-body">
+
+					        	  <img src="Example.jpg" class="img-responsive" alt="">
+
+					        </div>
+					        <div class="modal-footer">
+					          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					        </div>
+					      </div>
+
+					    </div>
+					  </div>
+				</div>
+			</div>
+
+	</div>
+
+<script>
+    $('.dropdown-menu').click(function(e) {
+    e.stopPropagation();
+    });
+    $('#profile-sidebar').affix({
+    	offset: {
+        top: $('#scroll').height()
+    }
+	});
+</script>
