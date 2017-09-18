@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from .models import Profile, Field, Area
+from .models import Profile, Field, Area, Supervise
 # from .forms import CategoryFieldForm
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -11,4 +11,5 @@ class ProfileAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Field)
 admin.site.register(Area)
+admin.site.register(Supervise)
 admin.site.unregister(Group)

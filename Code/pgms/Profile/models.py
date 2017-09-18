@@ -95,6 +95,9 @@ class Profile(BaseProfile, Students, Supervisor):
     pass
 
 class Supervise(models.Model):
-    s_supervisor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='supervisor')
-    s_student_1 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student_1')
-    s_student_2 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student_2')
+    s_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='supervisor', verbose_name="Supervisor")
+    s_student_1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_1', verbose_name="Student 1")
+    s_student_2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_2', verbose_name="Student 2")
+
+    def __str__(self):
+        return "{} - {}, {}".format(self.s_supervisor, self.s_student_1, self.s_student_2 or "")
