@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from .models import Profile
+from .models import Profile, Field, Area
 # from .forms import CategoryFieldForm
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -9,4 +9,6 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username',)
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Field)
+admin.site.register(Area)
 admin.site.unregister(Group)

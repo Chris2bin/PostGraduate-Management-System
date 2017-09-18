@@ -13,7 +13,19 @@ class MinMaxFloat(models.FloatField):
         defaults.update(kwargs)
         return super(MinMaxFloat, self).formfield(**defaults)
 
-# Base class
+class Field(models.Model):
+    f_name = models.CharField(max_length=500, verbose_name="Field Name")
+
+    def __str__(self):
+        return self.f_name
+
+class Area(models.Model):
+    a_name = models.CharField(max_length=500, verbose_name="Area Name")
+    a_field = models.ForeignKey(Field, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.a_name
+
 class BaseProfile(models.Model):
 
     USER_TYPES = (
@@ -26,24 +38,22 @@ class BaseProfile(models.Model):
         ('Male', 'Male'),
     )
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                primary_key=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, primary_key=True)
     user_dob = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
     user_gender = models.CharField(choices=GENDERS, verbose_name="Gender", max_length=6)
     user_address = models.TextField(max_length=500, verbose_name="Address")
     user_photo = models.FileField(default='', verbose_name="Profile Picture", null=True, blank=True)
     user_type = models.CharField(choices=USER_TYPES, verbose_name="User Type", max_length=10)
+    user_area = models.ForeignKey(Area, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Area")
 
     def __str__(self):
         return "{} - {}".format(self.user, self.user_type or "")
-
 
     def get_absolute_url(self):
         return reverse('Profile:profile', kwargs={'username': self.user__username})
 
     class Meta:
         abstract = True
-
 
 class Students(models.Model):
     # Student type
@@ -83,3 +93,8 @@ class Supervisor(models.Model):
 
 class Profile(BaseProfile, Students, Supervisor):
     pass
+
+class Supervise(models.Model):
+    s_supervisor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='supervisor')
+    s_student_1 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student_1')
+    s_student_2 = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='student_2')
