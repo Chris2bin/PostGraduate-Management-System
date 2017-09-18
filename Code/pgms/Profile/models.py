@@ -96,8 +96,8 @@ class Profile(BaseProfile, Students, Supervisor):
 
 class Supervise(models.Model):
     s_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='supervisor', verbose_name="Supervisor")
-    s_student_1 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_1', verbose_name="Student 1")
-    s_student_2 = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_2', verbose_name="Student 2")
+    s_cosupervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_1', verbose_name="Co-supervisor")
+    s_student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_2', verbose_name="Student")
 
     def __str__(self):
-        return "{} - {}, {}".format(self.s_supervisor, self.s_student_1, self.s_student_2 or "")
+        return "{} - {}, {}".format(self.s_supervisor, self.s_cosupervisor, self.s_student or "")
