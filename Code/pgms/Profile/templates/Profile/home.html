@@ -12,17 +12,20 @@
 				<!--End of profile picture-->
 				<!--sidebar user infor-->
 				<div class="profile-usertitle">
-					<div class = "profie-usertitle-name">
-						{{ profile.user.first_name }} {{ profile.user.last_name }}
-					</div>
-					<div class = "profile-usertitle-id">
-						{{ profile.user.username }}
-					</div>
-					<div class = "profile-usertitle-course">
-						{{ profile.user_type }}
+					<h4><strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong></h4>
+					<div>
 						{% if profile.user_type == 'Student' %}
-							({{ profile.stud_type }})
+							{% if profile.stud_type == 'By Research' %}
+								Research Student
+							{% elif profile.stud_type == 'By Coursework'%}
+								Coursework Student
+							{% else %}
+								{{ profile.user_type }}
+							{% endif %}
 						{% endif %}
+					</div>
+					<div>
+						{{ profile.user.username }}
 					</div>
 				</div>
 				<div class="profile-usermenu">
