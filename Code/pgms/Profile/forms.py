@@ -1,7 +1,6 @@
 from django import forms
-from django.shortcuts import render
 from django.contrib.auth.models import User
-from .models import BaseProfile, Profile
+from .models import BaseProfile
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
@@ -25,7 +24,6 @@ class ProfileEditForm(forms.ModelForm):
         self.helper.layout.append(Submit('save', 'Save'))
         self.fields['first_name'] =  forms.CharField(initial=self.instance.user.first_name)
         self.fields['last_name'] =  forms.CharField(initial=self.instance.user.last_name)
-        # self.fields['user_photo'] = forms.FileField(initial=self.instance.user_photo)
 
     class Meta:
         model = BaseProfile
