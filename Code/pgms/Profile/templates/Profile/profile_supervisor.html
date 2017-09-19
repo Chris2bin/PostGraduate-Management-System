@@ -167,18 +167,10 @@
                 </div>
                 <div class="modal-body">
                     <!-- Form -->
-                    <form id="updateForm">
-                        <div class="form-group">
-                            <label for="sel1">Current Progress:</label>
-                            <select class="form-control" id="sel1">
-                                <option value="None">None</option>
-                                <option value="Proposal Defense">Proposal Defense</option>
-                                <option value="Work Completion Seminar">Work Completion Seminar</option>
-                                <option value="Thesis Examination">Thesis Examination</option>
-                                <option value="Completed">Completed</option>
-                            </select>
-                        </div>
-                        <input class="btn btn-info btn-sm" type="submit" value="Submit" form="updateForm">
+                    <form class="form-horizontal" id="updateForm" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'Profile/form_template.html' %}
+                        <input class="btn btn-info btn-sm" type="submit" value="Update" form="updateForm">
                     </form>
                  </div>
             </div>

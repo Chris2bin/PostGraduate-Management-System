@@ -81,7 +81,7 @@ class Students(models.Model):
     user_feesOwed = models.FloatField(verbose_name="Outstanding Payment", default=0)
     stud_type = models.CharField(choices=STUDENT_TYPE, verbose_name="Student Type", blank=True, null=True, max_length=13)
     br_title = models.CharField(max_length=100, verbose_name="Research Title", unique=True, null=True, blank=True)
-    br_progress = models.CharField(choices=PROGRESS, verbose_name="Research Progress", default='None', max_length=18)
+    br_progress = models.CharField(choices=PROGRESS, verbose_name="Research Progress", default='None', max_length=23)
     bc_cgpa = MinMaxFloat(min_value=0.0, max_value=4.0, verbose_name="CGPA", default=0.0)
 
     class Meta:

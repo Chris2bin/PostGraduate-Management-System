@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
 from .models import Profile
-from .forms import UserForm, ProfileEditForm
+from .forms import UserForm, ProfileEditForm, ProgressForm
 
 def login_user(request):
     if request.method == "POST":
@@ -58,10 +58,18 @@ def profile(request, username):
     else:
         profile = Profile.objects.get(pk=request.user.id)
         target_profile = Profile.objects.get(user__username=username)
+
         if profile.user_type == 'Supervisor':
-            return render(request, 'Profile/profile_supervisor.html', {'profile': profile, 'target_profile': target_profile,})
+            form = ProgressForm(request.POST or None)
+            if request.POST:
+                if form.is_valid():
+                    progress = form.cleaned_data.get("br_progress")
+                    target_profile.br_progress = progress
+                    target_profile.save()
+            return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile,})
         elif profile.user_type == 'Student':
-            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, })
+            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile,})
+
 
 def change_password(request):
     profile = Profile.objects.get(pk=request.user.id)
