@@ -42,7 +42,7 @@ class BaseProfile(models.Model):
     user_dob = models.DateField(null=True, blank=True, verbose_name="Date of Birth")
     user_gender = models.CharField(choices=GENDERS, verbose_name="Gender", max_length=6)
     user_address = models.TextField(max_length=500, verbose_name="Address")
-    user_photo = models.FileField(default='', verbose_name="Profile Picture", null=True, blank=True)
+    user_photo = models.FileField(default="", verbose_name="Profile Picture", null=True, blank=True)
     user_type = models.CharField(choices=USER_TYPES, verbose_name="User Type", max_length=10)
     user_area = models.ForeignKey(Area, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Area")
 
@@ -72,8 +72,9 @@ class Students(models.Model):
         ('None', 'None'),
         ('Proposal Defense', 'Proposal Defense'),
         ('Work Completion Seminar', 'Work Completion Seminar'),
-        ('Thesis examination', 'Thesis examination'),
-        ('Viva voce', 'Viva voce'),
+        ('Thesis Examination', 'Thesis Examination'),
+        ('Viva Voce', 'Viva Voce'),
+        ('Completed', 'Completed'),
     )
     # Attributes
     user_status = models.CharField(choices=STATUS, verbose_name="Academic Status", default='Active', max_length=10)
@@ -95,9 +96,9 @@ class Profile(BaseProfile, Students, Supervisor):
     pass
 
 class Supervise(models.Model):
-    s_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='supervisor', verbose_name="Supervisor")
-    s_cosupervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_1', verbose_name="Co-supervisor")
-    s_student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_2', verbose_name="Student")
+    s_supervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='supervisor', verbose_name="Supervisor", null=True)
+    s_cosupervisor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='cosupervisor', verbose_name="Co-supervisor", null=True)
+    s_student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_2', verbose_name="Student", null=True)
 
     def __str__(self):
         return "{} - {}, {}".format(self.s_supervisor, self.s_cosupervisor, self.s_student or "")

@@ -1,0 +1,189 @@
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'Profile/css/progress-bar.css' %}" />
+
+<div>
+    <!--Header-->
+    <div class="profile-content-head">
+        <!--profile picture-->
+        <div class="profile-userpic">
+            <center>
+                <button type="button" class="btn btn-userpic">
+                    {% if target_profile.user_photo %}
+                        <img src="{{ target_profile.user_photo.url }}" class="img-responsive" alt="">
+                    {% else %}
+                        <img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+                    {% endif %}
+                </button>
+            </center>
+        </div>
+        <!--End of profile picture-->
+        <!--sidebar user information -->
+        <div class="profile-usertitle">
+            <h4><strong>{{ target_profile.user.first_name }} {{ target_profile.user.last_name }}</strong></h4>
+            <div>
+                <strong>
+                    {% if target_profile.user_type == 'Student' %}
+                        {% if target_profile.stud_type == 'By Research' %}
+                            Research Student
+                        {% elif target_profile.stud_type == 'By Coursework'%}
+                            Coursework Student
+                        {% endif %}
+                    {% else %}
+                        {{ target_profile.user_type }}
+                    {% endif %}
+                </strong>
+            </div>
+            <div>
+                {{ target_profile.user.username }}
+            <div>
+                {% if target_profile.user_type == 'Supervisor' %}
+                    <button type="button" class="btn btn-info">Make Appointment</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!--Content-->
+<div>
+    <div class="profile-content-head">
+        <div class="profile-usertitle">
+            {% if target_profile.user_type == 'Supervisor' or target_profile.stud_type == 'By Research' %}
+                <div>
+                    <strong>Field:</strong>
+                </div>
+                <div>
+                    {{ target_profile.user_area.a_field.f_name }}
+                </div>
+                <div>
+                    <strong>Area:</strong>
+                </div>
+                <div>
+                    {{ target_profile.user_area.a_name }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- Display progress bar -->
+    <div>
+        {% if target_profile.stud_type == 'By Research' %}
+            {% if target_profile.br_progress == 'None' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-active" data-step="1">
+                        Proposal Defense
+                    </li>
+                    <li data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Proposal Defense' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
+                    <li class="is-active" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Work Completion Seminar' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
+                    <li class="is-complete" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li class="is-active" data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Thesis Examination' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
+                    <li class="is-complete" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li class="is-complete" data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="is-active progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Completed' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
+                    <li class="is-complete" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li class="is-complete" data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="is-complete progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% endif %}
+        {% endif %}
+    </div>
+
+    <!-- Display update progress button -->
+    <div class="profile-content-head">
+        <div class="profile-usertitle">
+            {% if target_profile.stud_type == 'By Research' %}
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#updateModal">Update Progress</button>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="updateModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Update Progress</h4>
+                </div>
+                <div class="modal-body">
+                    <!-- Form -->
+                    <form id="updateForm">
+                        <div class="form-group">
+                            <label for="sel1">Current Progress:</label>
+                            <select class="form-control" id="sel1">
+                                <option value="None">None</option>
+                                <option value="Proposal Defense">Proposal Defense</option>
+                                <option value="Work Completion Seminar">Work Completion Seminar</option>
+                                <option value="Thesis Examination">Thesis Examination</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                        </div>
+                        <input class="btn btn-info btn-sm" type="submit" value="Submit" form="updateForm">
+                    </form>
+                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

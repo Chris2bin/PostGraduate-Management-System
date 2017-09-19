@@ -53,15 +53,22 @@ def home(request):
             return render(request, 'Profile/home.html', {'profile': profile,})
 
 def profile(request, username):
-    profile = Profile.objects.get(user__username=username)
-    return render(request, 'Profile/profile.html', {'profile': profile,})
+    if not request.user.is_authenticated():
+        return render(request, 'Profile/login.html')
+    else:
+        profile = Profile.objects.get(pk=request.user.id)
+        target_profile = Profile.objects.get(user__username=username)
+        if profile.user_type == 'Supervisor':
+            return render(request, 'Profile/profile_supervisor.html', {'profile': profile, 'target_profile': target_profile,})
+        elif profile.user_type == 'Student':
+            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, })
 
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            update_session_auth_hash(request, user)  # Important!
+            update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
             return redirect('Profile:home')
         else:
@@ -78,4 +85,5 @@ def edit_profile(request):
     if request.POST:
         if profile_edit_form.is_valid():
             profile_edit_form.save_all_fields_from_request(request=request)
+            return redirect('Profile:home')
     return render(request, 'Profile/edit_profile.html', {'form': profile_edit_form})

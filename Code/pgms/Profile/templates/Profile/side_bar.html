@@ -22,15 +22,17 @@
 				<div class="profile-usertitle">
 					<h4><strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong></h4>
 					<div>
-						{% if profile.user_type == 'Student' %}
-							{% if profile.stud_type == 'By Research' %}
-								Research Student
-							{% elif profile.stud_type == 'By Coursework'%}
-								Coursework Student
+						<strong>
+							{% if profile.user_type == 'Student' %}
+								{% if profile.stud_type == 'By Research' %}
+									Research Student
+								{% elif profile.stud_type == 'By Coursework'%}
+									Coursework Student
+								{% endif %}
 							{% else %}
 								{{ profile.user_type }}
 							{% endif %}
-						{% endif %}
+						</strong>
 					</div>
 					<div>
 						{{ profile.user.username }}
@@ -94,9 +96,9 @@
 								Research Student
 							{% elif profile.stud_type == 'By Coursework'%}
 								Coursework Student
-							{% else %}
-								{{ profile.user_type }}
 							{% endif %}
+						{% else %}
+							{{ profile.user_type }}
 						{% endif %}
 					</div>
 					<div>

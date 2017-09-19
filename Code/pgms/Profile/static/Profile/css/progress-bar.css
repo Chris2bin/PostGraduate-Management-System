@@ -1,0 +1,76 @@
+.my_progress {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  color: #849397;
+}
+.my_progress > li {
+  position: relative;
+  display: table-cell;
+  text-align: center;
+  font-size: 0.8em;
+}
+.my_progress > li:before {
+  content: attr(data-step);
+  display: block;
+  margin: 0 auto;
+  background: #DFE3E4;
+  width: 3em;
+  height: 3em;
+  text-align: center;
+  margin-bottom: 0.25em;
+  line-height: 3em;
+  border-radius: 100%;
+  position: relative;
+  z-index: 1000;
+}
+.my_progress > li:after {
+  content: '';
+  position: absolute;
+  display: block;
+  background: #DFE3E4;
+  width: 100%;
+  height: 0.5em;
+  top: 1.25em;
+  left: 50%;
+  margin-left: 1.5em\9;
+  z-index: -1;
+}
+.my_progress > li:last-child:after {
+  display: none;
+}
+.my_progress > li.is-complete {
+  color: #2ECC71;
+}
+.my_progress > li.is-complete:before, .my_progress > li.is-complete:after {
+  color: #FFF;
+  background: #2ECC71;
+}
+.my_progress > li.is-active {
+  color: #3498DB;
+}
+.my_progress > li.is-active:before {
+  color: #FFF;
+  background: #3498DB;
+}
+
+/**
+ * Needed for IE8
+ */
+.my_progress__last:after {
+  display: none !important;
+}
+
+/**
+ * Size Extensions
+ */
+.my_progress--medium {
+  font-size: 1.5em;
+}
+
+.my_progress--large {
+  font-size: 2em;
+}
