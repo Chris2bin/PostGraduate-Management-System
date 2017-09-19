@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^', include('Profile.urls')),
     url(r'^', include('Appointment.urls')),
     url(r'^', include('Transaction.urls')),
+    url(r'^', include('Application.urls')),
 ]
 
 if settings.DEBUG:

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Profile',
     'Transaction',
     'Appointment',
+    'Application',
 ]
 
 MIDDLEWARE = [
