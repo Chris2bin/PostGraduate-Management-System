@@ -64,20 +64,20 @@ def profile(request, username):
             return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, })
 
 def change_password(request):
+    profile = Profile.objects.get(pk=request.user.id)
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
             update_session_auth_hash(request, user)
             messages.success(request, 'Your password was successfully updated!')
-            return redirect('Profile:home')
+            return render(request, 'Profile/home.html', {'profile': profile,})
         else:
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'Profile/change_password.html', {
-        'form': form
-    })
+    profile = Profile.objects.get(pk=request.user.id)
+    return render(request, 'Profile/change_password.html', {'form': form, 'profile': profile,})
 
 def edit_profile(request):
     profile_instance, created = Profile.objects.get_or_create(user=request.user)
@@ -85,5 +85,7 @@ def edit_profile(request):
     if request.POST:
         if profile_edit_form.is_valid():
             profile_edit_form.save_all_fields_from_request(request=request)
-            return redirect('Profile:home')
-    return render(request, 'Profile/edit_profile.html', {'form': profile_edit_form})
+            profile = Profile.objects.get(pk=request.user.id)
+            return render(request, 'Profile/home.html', {'profile': profile,})
+    profile = Profile.objects.get(pk=request.user.id)
+    return render(request, 'Profile/edit_profile.html', {'form': profile_edit_form, 'profile': profile,})
