@@ -34,7 +34,7 @@ class Apply(models.Model):
     app_file_upload3 = models.FileField(verbose_name="Qualification",upload_to='File/',null=True)
     app_created_at = models.DateTimeField(auto_now_add=True,null=True)
     app_updated_at = models.DateTimeField(auto_now=True,null=True)
-    user = models.ForeignKey(User, default=1)
-
+    app_admin = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='supervisor', verbose_name="Approving Admin", null=True)
+    app_student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='student_1', verbose_name="User", null=True)
     def __str__(self):
         return self.app_name_first + ' ' + self.app_name_last
