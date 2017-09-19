@@ -1,0 +1,36 @@
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="profile-content-head">
+    <h1>Search Result</h1>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>ID</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in all_profiles %}
+                <tbody>
+                    <tr class='clickable-row' data-href={% url 'Profile:profile' p.user.username %}>
+                        <td>{{ p.user.first_name }} {{ p.user.last_name }}</td>
+                        <td>{{ p.user.username }}</td>
+                        <td>{{ p.user_type }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+jQuery(document).ready(function($) {
+$(".clickable-row").click(function() {
+window.location = $(this).data("href");
+    });
+});
+</script>
+{% endblock %}

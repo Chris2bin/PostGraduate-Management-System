@@ -47,10 +47,15 @@ def home(request):
             all_profiles = all_profiles.filter(
                 Q(user__username__contains=query) | Q(user_type__contains=query)
             ).distinct()
-
-            return render(request, 'Profile/home.html', {'all_profiles': all_profiles, 'profile': profile,})
+            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile,})
         else:
             return render(request, 'Profile/home.html', {'profile': profile,})
+
+def search(request):
+    if not request.user.is_authenticated():
+        return render(request, 'Profile/login.html')
+    else:
+        return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, })
 
 def profile(request, username):
     if not request.user.is_authenticated():
