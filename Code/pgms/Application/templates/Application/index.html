@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<hmtl lang="en">
+<head>
+  <title>BoboBoyz</title>
+  {% load staticfiles %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="icon" href="Penguin.png" type="image/png"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{% static 'Application/style_1.css' %}" />
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css"/>
+  <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/js/bootstrapValidator.min.js"> </script>
+</head>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+			{% csrf_token %}
+			<div class="form-profile">
+				<form>
+				  <div class="table-responsive">          
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th>Name</th>
+						<th>Email Address</th>
+						<th>Submitted date</th>
+						<th></th>
+					  </tr>
+					</thead>
+					<tbody>
+					{% for apply in all_applys %}
+					  <tr>
+						<td>{{apply.app_name_last}} {{apply.app_name_first}}</td>
+						<td>{{apply.app_email}}</td>
+						<td>{{apply.app_created_at}}</td>
+						<td><a href="{% url 'Application:detail' apply.id  %}"><button type="button" class="btn btn-default">View</button></a></td>
+					  </tr>
+					{% endfor %}
+					</tbody>
+				  </table>
+				</div>
+				</form>
+			</div>
+</div>
