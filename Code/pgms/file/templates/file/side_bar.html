@@ -1,0 +1,127 @@
+{% extends 'Profile/navigation_bar.html' %}
+{% block body %}
+{% load staticfiles %}
+<div class="container-fluid">
+	<div class="row profile">
+		<div class="col-md-4 col-sm-4 hidden-xs ">
+			<div class="profile-sidebar col-md-3 col-sm-3" id="profile-sidebar">
+				<!--profile picture-->
+				<div class="profile-userpic">
+					<center>
+						<button type="button" class="btn btn-userpic">
+							{% if profile.user_photo %}
+								<img src="{{ profile.user_photo.url }}" class="img-responsive" alt="">
+							{% else %}
+								<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+							{% endif %}
+						</button>
+					</center>
+				</div>
+				<!--End of profile picture-->
+				<!--sidebar user information -->
+				<div class="profile-usertitle">
+					<h4><strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong></h4>
+					<div>
+						{% if profile.user_type == 'Student' %}
+							{% if profile.stud_type == 'By Research' %}
+								Research Student
+							{% elif profile.stud_type == 'By Coursework'%}
+								Coursework Student
+							{% else %}
+								{{ profile.user_type }}
+							{% endif %}
+						{% endif %}
+					</div>
+					<div>
+						{{ profile.user.username }}
+					</div>
+				</div>
+				<div class="profile-usermenu">
+					<ul class = "nav navbar-fixed-left">
+						<li class = "active">
+							<a href="Home.html">
+							<span class= "glyphicon glyphicon-home"></span>
+							Home</a>
+						</li>
+						<li class = "">
+							<a href="Profile.html">
+							<span class= "glyphicon glyphicon-user"></span>
+							Profile</a>
+						</li>
+						<li class = "">
+							<a href="Subject.html">
+							<span class= "glyphicon glyphicon-education"></span>
+							Subject</a>
+						</li>
+						<li class = "">
+							<a href="File.html">
+							<span class= "glyphicon glyphicon-tasks"></span>
+							File</a>
+						</li>
+						<li class="">
+							<a href="AccountInquriy.html">
+							<span class= "glyphicon glyphicon-stats"></span>
+							Finance</a>
+						</li>
+					</ul>
+				</div>
+				<!--End Menu-->
+
+			</div>
+		</div>
+
+		<div class="col-md-8 col-sm-8 col-xs-12">
+			<div class="profile-content-head visible-xs">
+				<!--profile picture-->
+				<div class="profile-userpic">
+					<center>
+						<button type="button" class="btn btn-userpic">
+							{% if profile.user_photo %}
+								<img src="{{ profile.user_photo.url }}" class="img-responsive" alt="">
+							{% else %}
+								<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+							{% endif %}
+						</button>
+					</center>
+				</div>
+				<!--End of profile picture-->
+				<!--sidebar user information -->
+				<div class="profile-usertitle">
+					<h4><strong>{{ profile.user.first_name }} {{ profile.user.last_name }}</strong></h4>
+					<div>
+						{% if profile.user_type == 'Student' %}
+							{% if profile.stud_type == 'By Research' %}
+								Research Student
+							{% elif profile.stud_type == 'By Coursework'%}
+								Coursework Student
+							{% else %}
+								{{ profile.user_type }}
+							{% endif %}
+						{% endif %}
+					</div>
+					<div>
+						{{ profile.user.username }}
+					</div>
+				</div>
+			</div>
+
+			{% block content %}
+			{% endblock %}
+
+		</div>
+	</div>
+
+</div>
+
+<script>
+    $('.dropdown-menu').click(function(e) {
+    e.stopPropagation();
+    });
+    $('#profile-sidebar').affix({
+    	offset: {
+        top: $('#scroll').height()
+    }
+	});
+</script>
+
+{% endblock %}
