@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Your Subject</title>
+</head>
+<body>
+
+<p>Your Subjects:</p>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>GPA</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in subjects %}
+    <tr>
+        <td>
+        <a> {{ obj.subject.name }}</a>
+      </td>
+      <td>
+      {% if obj.gpa == 0.00 %}
+        <a>-</a>
+      {% else %}
+        <a>{{ obj.gpa }}</a>
+      </td>
+      {%endif%}
+      <td>
+        <form action="{% url 'subject:delete' obj.id  %}" method="post" style="display: inline;">
+          {% csrf_token %}
+          <input type="hidden" name="enroll_id" value="{{ enroll.id }}" />
+          <button type="submit" class="btn btn-danger btn-xs">
+            <span class="glyphicon glyphicon-remove"></span> Delete
+          </button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+  <ul>
+    <li>
+      <a href="{% url 'subject:enroll'  %}">Add a Subject</a>
+    </li>
+  </ul>
+
+</body>
+</html>

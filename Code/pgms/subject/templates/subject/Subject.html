@@ -1,0 +1,52 @@
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="col-md-8 col-sm-8 col-xs-12">
+			<div class="form-profile">
+				<form>
+			  <h2>Enrolled Subjects</h2>
+
+				  <div class="table-responsive">
+				  <table class="table">
+					<thead>
+					  <tr>
+						<th>Subject name</th>
+						  <th>Credit Hour</th>
+					  <th>Fee</th>
+						<th></th>
+					  </tr>
+					</thead>
+					<tbody>
+					  {% for obj in subjects %}
+						<tr>
+						<td>
+						<a> {{ obj.subject.name }}</a>
+					  </td>
+						<td>
+						<a> {{ obj.subject.credit_hour }}</a>
+					  </td>
+					  <td>
+					  <a> RM {{ obj.subject.fee }}</a>
+					  </td>
+					  <td>
+						<form action="{% url 'subject:delete' obj.id  %}" method="post" style="display: inline;">
+						  {% csrf_token %}
+						  <input type="hidden" name="enroll_id" value="{{ enroll.id }}" />
+						  <button type="submit" class="btn btn-danger btn-xs">
+							<span class="glyphicon glyphicon-remove"></span> Delete
+						  </button>
+						</form>
+					  </td>
+					</tr>
+					{% endfor %}
+					</tbody>
+				  </table>
+			</div>
+					<ul>
+					<li>
+					  <a href="{% url 'subject:enroll'  %}">Add a Subject</a>
+					</li>
+				  </ul>
+		</div>
+		</div>
+{% endblock %}
