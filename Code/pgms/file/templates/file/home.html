@@ -3,7 +3,7 @@
 {% block body %}
 <body>
 
-<form class="navbar-form navbar-left" role="search" method="get" action="{% url 'file:home' %}">
+<form class="navbar-form navbar-left" role="search" method="get" action="{% url 'file:file' %}">
   <div class="form-group">
     <input type="text" class="form-control" name="q" value="{{ request.GET.q }}">
   </div>

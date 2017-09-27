@@ -8,7 +8,7 @@ app_name = 'file'
 
 urlpatterns = [
     #url('^file/',include('file.urls'),namespace='file'),
-    url(r'^$', views.home, name='home'),
+    url(r'^$', views.home, name='file'),
     url(r'^uploads/$', views.upload, name='upload'),
     url(r'^delete/(?P<file_id>[0-9]+)/$', views.delete_file, name='delete'),
 ]

@@ -23,9 +23,9 @@ def home(request):
             my_files = my_files.filter(
                 Q(file_title__contains=query)
             ).distinct()
-            return render(request, 'file/File.html', {'my_files':my_files,'files': files})
+            return render(request, 'file/File.html', {'my_files':my_files,'files': files, 'profile': profile, })
         else:
-            return render(request, 'file/File.html', {'my_files':my_files,'files': files})
+            return render(request, 'file/File.html', {'my_files':my_files,'files': files, 'profile': profile, })
     if profile.user_type == 'Supervisor':
     
         supervise = Supervise.objects.filter(Q(s_supervisor=request.user) | Q(s_cosupervisor=request.user))
@@ -41,9 +41,9 @@ def home(request):
                 Q(file_title__contains=query)
             ).distinct()
 
-            return render(request, 'file/File.html', {'my_files':my_files,'files': files})
+            return render(request, 'file/File.html', {'my_files':my_files,'files': files, 'profile': profile, })
         else:
-            return render(request, 'file/File.html', {'my_files':my_files,'files': files})
+            return render(request, 'file/File.html', {'my_files':my_files,'files': files, 'profile': profile, })
     else:
         logout(request)
         return render(request, 'Profile/login.html', {'error_message': 'You are NOT allowed to enter this page.'})
@@ -65,7 +65,7 @@ def upload(request):
 
         else:
             form = FileForm()
-        return render(request, 'file/upload.html', {'form': form})
+        return render(request, 'file/upload.html', {'form': form, 'profile': profile, })
 
 def delete_file(request, file_id):
         file = File.objects.get(pk=file_id)
@@ -85,9 +85,9 @@ def delete_file(request, file_id):
                 my_files = my_files.filter(
                     Q(file_title__contains=query)
                 ).distinct()
-                return render(request, 'file/File.html', {'my_files': my_files, 'files': files})
+                return render(request, 'file/File.html', {'my_files': my_files, 'files': files, 'profile': profile, })
             else:
-                return render(request, 'file/File.html', {'my_files': my_files, 'files': files})
+                return render(request, 'file/File.html', {'my_files': my_files, 'files': files, 'profile': profile, })
         if profile.user_type == 'Supervisor':
             files = []
             my_files = []
@@ -106,9 +106,9 @@ def delete_file(request, file_id):
                     files = s.Filter(
                         Q(file_title__contains__in=query)
                     ).distinct()
-                return render(request, 'file/File.html', {'my_files': my_files, 'files': files})
+                return render(request, 'file/File.html', {'my_files': my_files, 'files': files, 'profile': profile, })
             else:
-                return render(request, 'file/File.html', {'my_files': my_files, 'files': files})
+                return render(request, 'file/File.html', {'my_files': my_files, 'files': files, 'profile': profile, })
         else:
             logout(request)
             return render(request, 'Profile/login.html',
