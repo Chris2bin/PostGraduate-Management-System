@@ -3,7 +3,8 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'Profile/css/progress-bar.css' %}" />
 
-<div>
+<!--Header-->
+<div class="profile-content-head">
     <!--Header-->
     <div class="profile-content-head">
         <!--profile picture-->
@@ -37,40 +38,39 @@
             </div>
             <div>
                 {{ target_profile.user.username }}
-            <div>
-                {% if target_profile.user_type == 'Supervisor' %}
-                    <button type="button" class="btn btn-info">Make Appointment</button>
-                {% endif %}
+                <div>
+                    {% if target_profile.user_type == 'Supervisor' %}
+                        <button type="button" class="btn btn-info">Make Appointment</button>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
 </div>
 <!--Content-->
 <div>
-    <div class="profile-content-head">
-        <div class="profile-usertitle">
-            {% if target_profile.user_type == 'Supervisor' or target_profile.stud_type == 'By Research' %}
-                <div>
-                    <strong>Field:</strong>
-                </div>
-                <div>
-                    {{ target_profile.user_area.a_field.f_name }}
-                </div>
-                <div>
-                    <strong>Area:</strong>
-                </div>
-                <div>
-                    {{ target_profile.user_area.a_name }}
-                </div>
-            {% endif %}
-        </div>
+    <div class="profile-usertitle">
+        {% if target_profile.user_type == 'Supervisor' or target_profile.stud_type == 'By Research' %}
+            <div>
+                <strong>Field:</strong>
+            </div>
+            <div>
+                {{ target_profile.user_area.a_field.f_name }}
+            </div>
+            <div>
+                <strong>Area:</strong>
+            </div>
+            <div>
+                {{ target_profile.user_area.a_name }}
+            </div>
+        {% endif %}
     </div>
     <!-- Display progress bar -->
     <div>
         {% if target_profile.stud_type == 'By Research' %}
             {% if target_profile.br_progress == 'None' %}
                 <ol class="my_progress my_progress--medium">
-                    <li class="is-active" data-step="1">
+                    <li data-step="1">
                         Proposal Defense
                     </li>
                     <li data-step="2">
@@ -85,10 +85,10 @@
                 </ol>
             {% elif target_profile.br_progress == 'Proposal Defense' %}
                 <ol class="my_progress my_progress--medium">
-                    <li class="is-complete" data-step="1">
+                    <li class="is-active" data-step="1">
                         Proposal Defense
                     </li>
-                    <li class="is-active" data-step="2">
+                    <li data-step="2">
                         Work Completion Seminar
                     </li>
                     <li data-step="3">
@@ -103,6 +103,21 @@
                     <li class="is-complete" data-step="1">
                         Proposal Defense
                     </li>
+                    <li class="is-active" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Thesis Examination' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
                     <li class="is-complete" data-step="2">
                         Work Completion Seminar
                     </li>
@@ -113,7 +128,7 @@
                         Viva Voce
                     </li>
                 </ol>
-            {% elif target_profile.br_progress == 'Thesis Examination' %}
+            {% elif target_profile.br_progress == 'Viva Voce' %}
                 <ol class="my_progress my_progress--medium">
                     <li class="is-complete" data-step="1">
                         Proposal Defense
@@ -156,16 +171,19 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="updateModal" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Update Progress</h4>
-                </div>
-                <div class="modal-body">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="updateModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Update Progress</h4>
+            </div>
+            <div class="modal-body">
+                 <div class="panel-body">
                     <!-- Form -->
                     <form class="form-horizontal" id="updateForm" role="form" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -173,6 +191,8 @@
                         <input class="btn btn-info btn-sm" type="submit" value="Update" form="updateForm">
                     </form>
                  </div>
+             </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>

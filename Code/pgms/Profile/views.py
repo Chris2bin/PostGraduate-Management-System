@@ -6,7 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
 from .models import Profile
+from Application.models import Apply
 from .forms import UserForm, ProfileEditForm, ProgressForm
+from Application.forms import ApplyForm
+
 
 def login_user(request):
     if request.method == "POST":
@@ -15,19 +18,23 @@ def login_user(request):
             password = request.POST['password']
             user = authenticate(username=username, password=password)
             if user is not None:
-                    if user.is_active:
-                        login(request, user)
-                        profile = Profile.objects.get(pk=request.user.id)
-                        if profile.user_type == 'Admin':
-                            return redirect('/admin/', context_instance=RequestContext(request))
-                        else:
-                            return redirect('/home/', context_instance=RequestContext(request))
+                if user.is_active:
+                    login(request, user)
+                    profile = Profile.objects.get(pk=request.user.id)
+                    try:
+                        application = Apply.objects.get(app_student=request.user)
+                    except Apply.DoesNotExist:
+                        application = None
+                    if profile.user_type == 'Admin':
+                        return redirect('/admin/', context_instance=RequestContext(request))
                     else:
-                        return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
-        
+                        return render(request, 'Profile/home.html', {'profile': profile, 'application': application})
+                else:
+                    return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
+
         elif request.POST.get("apply") == "Apply":
             if request.POST:
-                form = ApplyForm(request.POST,request.FILES)
+                form = ApplyForm(request.POST, request.FILES)
                 app_name_first = request.POST['app_name_first']
                 app_name_last = request.POST['app_name_last']
                 app_birthday = request.POST['app_birthday']
@@ -59,15 +66,22 @@ def home(request):
         return render(request, 'Profile/login.html')
     else:
         profile = Profile.objects.get(pk=request.user.id)
-        all_profiles = Profile.objects.all()
+        try:
+            application = Apply.objects.get(app_student=request.user)
+        except Apply.DoesNotExist:
+            application = None
+        # Filter away admin profile
+        all_profiles = Profile.objects.all().filter(
+                Q(user_type="Supervisor") | Q(user_type="Student")
+            ).distinct()
         query = request.GET.get("q")
         if query:
             all_profiles = all_profiles.filter(
                 Q(user__username__contains=query) | Q(user_type__contains=query)
             ).distinct()
-            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile,})
+            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
         else:
-            return render(request, 'Profile/home.html', {'profile': profile,})
+            return render(request, 'Profile/home.html', {'profile': profile, 'application': application, })
 
 def search(request):
     if not request.user.is_authenticated():
@@ -81,6 +95,17 @@ def profile(request, username):
     else:
         profile = Profile.objects.get(pk=request.user.id)
         target_profile = Profile.objects.get(user__username=username)
+        # Filter away admin profile
+        all_profiles = Profile.objects.all().filter(
+                Q(user_type="Supervisor") | Q(user_type="Student")
+            ).distinct()
+        # Search
+        query = request.GET.get("q")
+        if query:
+            all_profiles = all_profiles.filter(
+                Q(user__username__contains=query) | Q(user_type__contains=query)
+            ).distinct()
+            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, })
 
         if profile.user_type == 'Supervisor':
             form = ProgressForm(request.POST or None)
@@ -91,7 +116,11 @@ def profile(request, username):
                     target_profile.save()
             return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile,})
         elif profile.user_type == 'Student':
-            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile,})
+            try:
+                application = Apply.objects.get(app_student=request.user.id)
+            except Apply.DoesNotExist:
+                application = None
+            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, 'application': application, })
 
 
 def change_password(request):

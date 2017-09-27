@@ -3,7 +3,8 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'Profile/css/progress-bar.css' %}" />
 
-<div>
+<!--Header-->
+<div class="profile-content-head">
     <!--Header-->
     <div class="profile-content-head">
         <!--profile picture-->
@@ -37,33 +38,32 @@
             </div>
             <div>
                 {{ target_profile.user.username }}
+            </div>
             <div>
                 {% if target_profile.user_type == 'Supervisor' %}
                     <button type="button" class="btn btn-info">Make Appointment</button>
                 {% endif %}
             </div>
-        </div>
+    	</div>
     </div>
 </div>
 <!--Content-->
 <div>
-    <div class="profile-content-head">
-        <div class="profile-usertitle">
-            {% if target_profile.user_type == 'Supervisor' or target_profile.stud_type == 'By Research' %}
-                <div>
-                    <strong>Field:</strong>
-                </div>
-                <div>
-                    {{ target_profile.user_area.a_field.f_name }}
-                </div>
-                <div>
-                    <strong>Area:</strong>
-                </div>
-                <div>
-                    {{ target_profile.user_area.a_name }}
-                </div>
-            {% endif %}
-        </div>
+    <div class="profile-usertitle">
+        {% if target_profile.user_type == 'Supervisor' or target_profile.stud_type == 'By Research' %}
+	        <div>
+	            <strong>Field:</strong>
+	        </div>
+	        <div>
+	            {{ target_profile.user_area.a_field.f_name }}
+	        </div>
+	        <div>
+	            <strong>Area:</strong>
+	        </div>
+	        <div>
+	            {{ target_profile.user_area.a_name }}
+	        </div>
+        {% endif %}
     </div>
     <!-- Display progress bar -->
     <div>
@@ -147,7 +147,5 @@
         {% endif %}
     </div>
 </div>
-
-
 
 {% endblock %}

@@ -43,7 +43,7 @@ class BaseProfile(models.Model):
     user_gender = models.CharField(choices=GENDERS, verbose_name="Gender", max_length=6)
     user_address = models.TextField(max_length=500, verbose_name="Address")
     user_photo = models.FileField(default="", verbose_name="Profile Picture", null=True, blank=True)
-    user_type = models.CharField(default="Student",choices=USER_TYPES, verbose_name="User Type", max_length=10)
+    user_type = models.CharField(choices=USER_TYPES, verbose_name="User Type", max_length=10)
     user_area = models.ForeignKey(Area, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Area")
 
     def __str__(self):
@@ -77,7 +77,7 @@ class Students(models.Model):
         ('Completed', 'Completed'),
     )
     # Attributes
-    user_status = models.CharField(default="Active",choices=STATUS, verbose_name="Academic Status", default='Active', max_length=10)
+    user_status = models.CharField(choices=STATUS, verbose_name="Academic Status", default='Active', max_length=10)
     user_feesOwed = models.FloatField(verbose_name="Outstanding Payment", default=0)
     stud_type = models.CharField(choices=STUDENT_TYPE, verbose_name="Student Type", blank=True, null=True, max_length=13)
     br_title = models.CharField(max_length=100, verbose_name="Research Title", unique=True, null=True, blank=True)
