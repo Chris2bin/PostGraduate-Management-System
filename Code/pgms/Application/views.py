@@ -1,6 +1,7 @@
 from .models import Apply, User
 from django.shortcuts import render, get_object_or_404
 from .forms import ApplyForm, UserForm
+from Profile.models import Profile
 
 
 def list(request):
@@ -25,7 +26,7 @@ def detail(request, apply_id):
 			user = User(email=applys.app_email,username=username,first_name=applys.app_name_first,last_name=applys.app_name_last)
 			user.set_password(password)
 			user.save()
-			profile = Profile(user=user, user_address=applys.app_address, user_dob=applys.app_birthday, user_photo=applys.app_file_upload2,user_gender=applys.app_gender,stud_type=applys.app_type)
+			profile = Profile(user=user, user_address=applys.app_address, user_dob=applys.app_birthday, user_photo=applys.app_file_upload2,user_gender=applys.app_gender,stud_type=applys.app_type, user_type="Student")
 			profile.save()
 			applys.app_student = user
 			applys.app_admin = request.user
