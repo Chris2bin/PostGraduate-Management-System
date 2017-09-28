@@ -6,7 +6,7 @@ app_name = 'subject'
 
 urlpatterns = [
     #url(r'^$',views.home, name='home'),
-    url(r'^$',views.home, name='subject'),
-    url(r'^enroll/$', views.enroll_subject, name='enroll'),
-    url(r'^delete/(?P<enroll_id>[0-9]+)/$', views.delete, name='delete'),
+    url(r'^subject/$',views.home, name='subject'),
+    url(r'^subject/enroll/$', views.enroll_subject, name='enroll'),
+    url(r'^subject/delete/(?P<enroll_id>[0-9]+)/$', views.delete, name='delete'),
     ]
