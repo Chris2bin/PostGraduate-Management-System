@@ -1,4 +1,5 @@
 """pgms URL Configuration
+
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
 Examples:
@@ -27,6 +28,8 @@ urlpatterns = [
     url(r'^', include('Appointment.urls')),
     url(r'^', include('Transaction.urls')),
     url(r'^', include('Application.urls')),
+    url(r'^subject/', include('subject.urls')),
+    url(r'^file/', include('file.urls')),
 ]
 
 if settings.DEBUG:
