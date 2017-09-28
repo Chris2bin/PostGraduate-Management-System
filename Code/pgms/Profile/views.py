@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.urls import reverse
 from django.contrib.auth import update_session_auth_hash
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
 from .models import Profile
-from Application.models import Apply
+from Application.models import Application
 from .forms import UserForm, ProfileEditForm, ProgressForm
-from Application.forms import ApplyForm
+from Application.forms import ApplicationForm
 
 
 def login_user(request):
@@ -22,19 +23,20 @@ def login_user(request):
                     login(request, user)
                     profile = Profile.objects.get(pk=request.user.id)
                     try:
-                        application = Apply.objects.get(app_student=request.user)
-                    except Apply.DoesNotExist:
+                        application = Application.objects.get(app_student=request.user)
+                    except Application.DoesNotExist:
                         application = None
                     if profile.user_type == 'Admin':
-                        return redirect('/admin/', context_instance=RequestContext(request))
+                        all_applications = Application.objects.filter(app_admin=None).exclude(app_admin=request.user)
+                        return render(request,'Application/index.html',{'all_applications':all_applications})
                     else:
                         return render(request, 'Profile/home.html', {'profile': profile, 'application': application})
                 else:
                     return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
 
-        elif request.POST.get("apply") == "Apply":
+        elif request.POST.get("application") == "Application":
             if request.POST:
-                form = ApplyForm(request.POST, request.FILES)
+                form = ApplicationForm(request.POST, request.FILES)
                 app_name_first = request.POST['app_name_first']
                 app_name_last = request.POST['app_name_last']
                 app_birthday = request.POST['app_birthday']
@@ -67,8 +69,8 @@ def home(request):
     else:
         profile = Profile.objects.get(pk=request.user.id)
         try:
-            application = Apply.objects.get(app_student=request.user)
-        except Apply.DoesNotExist:
+            application = Application.objects.get(app_student=request.user)
+        except Application.DoesNotExist:
             application = None
         # Filter away admin profile
         all_profiles = Profile.objects.all().filter(
@@ -117,8 +119,8 @@ def profile(request, username):
             return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile,})
         elif profile.user_type == 'Student':
             try:
-                application = Apply.objects.get(app_student=request.user.id)
-            except Apply.DoesNotExist:
+                application = Application.objects.get(app_student=request.user.id)
+            except Application.DoesNotExist:
                 application = None
             return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, 'application': application, })
 
