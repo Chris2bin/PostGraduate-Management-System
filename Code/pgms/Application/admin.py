@@ -1,4 +1,4 @@
 from django.contrib import admin
-from .models import Apply
+from .models import Application
 # Register your models here.
-admin.site.register(Apply)
+admin.site.register(Application)

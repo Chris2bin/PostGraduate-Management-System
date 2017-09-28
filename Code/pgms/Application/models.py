@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import Permission, User
 
 
-class Apply(models.Model):
+class Application(models.Model):
     GENDER = (
         ('Female', 'Female'),
         ('Male', 'Male'),
