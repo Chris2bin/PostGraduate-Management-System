@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'Profile/css/Style.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'Profile/css/style1.css' %}" />
   <link rel="icon" href="Penguin.png" type="image/png"/>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -50,6 +50,28 @@
             {% if error_message %}
                 <p><strong>{{ error_message }}</strong></p>
             {% endif %}
+
+            {% if success_message %}
+            <div class="modal fade" role="dialog" aria-hidden="true" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="modalbox success col-sm-12 col-md-12 col-lg-12 center animate">
+                                <div class="icon">
+                                    <span class="glyphicon glyphicon-ok"></span>
+                                </div>
+
+                                <p><strong>{{ success_message }}</strong></p>
+                                <p>We are processing your application
+                                        <br>for verification.</p>
+                                <button type="button" data-dismiss="modal">OK</button>
+                            </div>
+                        </div>           
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
             <div class = "form-input">
                 <div class="form-group">
                     <span class="glyphicon glyphicon-user"></span> <label style="color:white">Username: </label><br>
@@ -64,9 +86,6 @@
       </form>
     </div>
     <div class="container-fluid">
-      {% if error_message %}
-          <p><strong>{{ error_message }}</strong></p>
-      {% endif %}
         <form id="applicationForm" method="post"  enctype="multipart/form-data" action="">
           {% csrf_token %}
             <div class="modal fade" id="Modal1" role="dialog">
@@ -188,6 +207,30 @@
 </body>
 
 <script type="text/javascript">
+$('#myModal').modal('show');
+
+$(document).ready(function() {
+        var state = true;
+
+        $('.redo').click(function() {
+                reanimate();
+        });
+
+        $('.error').hide().removeClass('animate');
+
+        var reanimate = function() {
+                if (state === false) {
+                        state = true;
+                        $('.success').show().addClass('animate');
+                        $('.error').hide().removeClass('animate');
+                } else {
+                        state = false;
+                        $('.success').hide().removeClass('animate');
+                        $('.error').show().addClass('animate');
+                }
+        };
+
+});
 $(document).ready(function() {
     $('#applicationForm').bootstrapValidator({
         feedbackIcons: {
