@@ -53,6 +53,7 @@ def login_user(request):
                 app_programme = request.POST['app_programme']
                 if form.is_valid():
                     form.save()
+                    return render(request, 'Profile/login.html', {'success_message':"Application submit sucessfull!"})
     return render(request, 'Profile/login.html')
 
 def logout_user(request):
