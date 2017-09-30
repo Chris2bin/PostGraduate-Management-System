@@ -37,6 +37,46 @@
   </div>
 </nav>
 
+{% csrf_token %}
+{% if reject_message %}
+    <div class="modal fade" role="dialog" aria-hidden="true" id="rejectMessage">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modalbox error col-sm-12 col-md-12 col-lg-12 center animate">
+                        <div class="icon">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </div>
+
+                        <p><strong>{{ reject_message }}</strong></p>
+                        
+                        <button type="button" data-dismiss="modal">OK</button>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% if success_message %}
+    <div class="modal fade" role="dialog" aria-hidden="true" id="successMessage">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="modalbox success col-sm-12 col-md-12 col-lg-12 center animate">
+                        <div class="icon">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </div>
+
+                        <p><strong>{{ success_message }}</strong></p>
+                        
+                        <button type="button" data-dismiss="modal">OK</button>
+                    </div>
+                </div>           
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 <div class="col-md-12 col-sm-12 col-xs-12">
 	{% csrf_token %}
 	<div class="form-profile">
@@ -66,3 +106,8 @@
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$('#rejectMessage').modal('show');
+$('#successMessage').modal('show');
+</script>
