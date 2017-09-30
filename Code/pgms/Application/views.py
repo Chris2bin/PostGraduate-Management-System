@@ -15,7 +15,7 @@ def list(request):
 
 def detail(request, application_id):
 	if not request.user.is_authenticated():
-		return render(request, 'Application/registration_form.html',{})
+		return render(request, 'Profile/login.html',{})
 	else:
 		applications = get_object_or_404(Application, pk=application_id)
 		form = UserForm(request.POST or None)
@@ -32,7 +32,7 @@ def detail(request, application_id):
 			applications.app_admin = request.user
 			applications.save()
 			all_applications = Application.objects.filter(app_admin=None).exclude(app_admin=request.user)
-			return render(request,'Application/index.html',{'all_applications':all_applications})
+			return render(request,'Application/index.html',{'all_applications' : all_applications,'success_message' : "New User created successful"})
 		context= {
 			"applications" : applications,
 			"form" : form,
@@ -46,6 +46,6 @@ def delete_application(request, application_id):
 			applications = get_object_or_404(Application, pk=application_id)
 			applications.delete()
 			all_applications = Application.objects.filter(app_admin=None).exclude(app_admin=request.user)
-			return render(request, 'Application/index.html', {'all_applications':all_applications})
+			return render(request, 'Application/index.html',{'all_applications' : all_applications,'reject_message' : "Application has been rejected"})
 		else:
 			return render(request, 'Profile/login.html',{})
