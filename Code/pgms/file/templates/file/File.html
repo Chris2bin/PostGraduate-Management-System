@@ -1,10 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
 {% extends 'Profile/side_bar.html' %}
 {% block content %}
 {% load staticfiles %}
-<div class="col-md-8 col-sm-8 col-xs-12">
-					<div class="form-profile table-responsive">
+<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="form-profile">
+					<h1>File</h1>
+					<div class="table-responsive">
 						<form>
-							<h1>File</h1>
+
 							<form class="navbar-form navbar-right" role="search" method="get" action="{% url 'file:file' %}">
 								<div class="input-group col-md-4 col-sm-4 col-xs-12 pull-right">
 									<input type="text" class="form-control" placeholder="Search" name="q" value="{{ request.GET.q }}">
@@ -14,33 +18,65 @@
 								</div>
 							</form>
 
-							<form>
-							<table class="table ">
+							{% if not files == None %}
+								<table class="table ">
+									<thead>
+									  <tr>
+										<th>File Name</th>
+										<th>Date Uploaded</th>
+										<th>By</th>
+										<th></th>
+										<th></th>
+									  </tr>
+									</thead>
+									<tbody>
+
+									{% for obj in files %}
+									<tr>
+									  <td>
+										<p>{{ obj.file_title }}</p>
+									  </td>
+									  <td>
+										<p> {{ obj.uploaded_at }}</p>
+									  </td>
+										<td>
+										<a href = "{% url 'file:peek' obj.owner.id %} " > {{ obj.owner.username }}</a>
+									  </td>
+									  <td>
+										<a target="_blank" href="{{ obj.file_upload.url }}">
+										  <button type="button" class = "btn btn-default glyphicon glyphicon-download"></button>
+										</a>
+									  </td>
+									  <td>
+									  </td>
+									</tr>
+									{% endfor %}
+									</tbody>
+								  </table>
+
+
+
+									<h4>Your File:</h4>
+								{% endif %}
+								<table class="table ">
 							    <thead>
 							      <tr>
 							        <th>File Name</th>
 							        <th>Date Uploaded</th>
-							        <th>By</th>
 								    <th></th>
 									<th></th>
 							      </tr>
 							    </thead>
 							    <tbody>
-							   {% for obj in my_files %}
+								{% for obj in my_files %}
 								<tr>
 								  <td>
-								  {% if obj.file_title != ''%}
-									<a>{{ obj.file_title }}</a>
-								  {% else %}
-									<a>{{ obj.file_upload.name }}</a>
+								  <p>{{ obj.file_title }}</p>
 								  </td>
-								  {%endif%}
 								  <td>
-									<a> {{ obj.uploaded_at }}</a>
+									<p> {{ obj.uploaded_at }}</p>
 								  </td>
-									<td>
-									<a> You</a>
-								  </td>
+
 								  <td>
 									<a target="_blank" href="{{ obj.file_upload.url }}">
 									  <button type="button" class = "btn btn-default glyphicon glyphicon-download"></button>
@@ -48,51 +84,22 @@
 								  </td>
 								  <td>
 
-								  <form action="{% url 'file:delete' obj.id %}" method="post" style="display: inline;">
+									  <form action="{% url 'file:delete' obj.id %}" method="post" style="display: inline;">
 									  {% csrf_token %}
 									  <input type="hidden" name="file_id" value="{{ file.id }}" />
 									  <button type="submit" class="btn btn-danger btn-xs">
-										<span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
+										<span class="glyphicon glyphicon-remove"></span> Delete
 									  </button>
 									</form>
 								  </td>
 								</tr>
 								{% endfor %}
 
-
-
-								{% for obj in files %}
-								<tr>
-								  <td>
-								  {% if obj.file_title != ''%}
-									<a>{{ obj.file_title }}</a>
-								  {% else %}
-									<a>{{ obj.file_upload.name }}</a>
-								  </td>
-								  {%endif%}
-								  <td>
-									<a> {{ obj.uploaded_at }}</a>
-								  </td>
-									<td>
-									<a> {{ obj.owner.username }}</a>
-								  </td>
-								  <td>
-									<a target="_blank" href="{{ obj.file_upload.url }}">
-									  <button type="button" class = "btn btn-default glyphicon glyphicon-download"></button>
-									</a>
-								  </td>
-								  <td>
-								  </td>
-								</tr>
-								{% endfor %}
-
 							    </tbody>
 							  </table>
-								<ul>
-								<li>
-								  <a href="{% url 'file:upload' %}">Upload Your File</a>
-								</li>
-							  </ul>
+								<a href="{% url 'file:upload' %}" class="btn btn-default">Upload Your File</a>
 
-							  </div>
+
+
 {% endblock %}
+	</html>

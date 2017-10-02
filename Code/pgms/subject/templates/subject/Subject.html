@@ -1,9 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
 {% extends 'Profile/side_bar.html' %}
 {% block content %}
 {% load staticfiles %}
-<div class="col-md-8 col-sm-8 col-xs-12">
+<div class="col-md-12 col-sm-12 col-xs-12">
 			<div class="form-profile">
-				<form>
 			  <h2>Enrolled Subjects</h2>
 
 				  <div class="table-responsive">
@@ -41,12 +42,8 @@
 					{% endfor %}
 					</tbody>
 				  </table>
-			</div>
-					<ul>
-					<li>
-					  <a href="{% url 'subject:enroll'  %}">Add a Subject</a>
-					</li>
-				  </ul>
-		</div>
-		</div>
+
+				<a href="{% url 'subject:enroll' %}" class="btn btn-default">Enroll subject</a>
 {% endblock %}
+
+</html>

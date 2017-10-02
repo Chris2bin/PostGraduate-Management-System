@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add new Subject</title>
-</head>
-<body>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Enroll</button>
-  </form>
-  <ul>
-    <li>
-      <a href="{% url 'subject:home' %}">Back</a>
-    </li>
-  </ul>
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="form-profile table-responsive">
+							<h1>Choose your subject</h1>
+                            <br />
+                            <br />
+                        <body>
+                          <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                              <p><a href="{% url 'subject:subject' %}" class = "btn btn-default pull-right">Return</a></p>
+                            <button type="submit" class = "btn btn-primary pull-right">Enroll</button>
+                          </form>
 
-</body>
+                          </body>
+
+
+
+
+{% endblock %}
 </html>

@@ -1,0 +1,60 @@
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="profile-content-head">
+    <h1>Personal Info</h1>
+    <hr>
+    <!--profile picture-->
+    <div class="profile-userpic">
+        <center>
+            <button type="button" class="btn btn-userpic">
+                {% if profile.user_photo %}
+                    <img src="{{ profile.user_photo.url }}" class="img-responsive" alt="">
+                {% else %}
+                    <img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+                {% endif %}
+            </button>
+        </center>
+    </div>
+    {% if profile.user_type == 'Student' %}
+        <div class="profile-userpic">
+            <table class="table table-user-information table-responsive">
+                <tbody>
+                    <tr>
+                        <td style="text-align:right"><strong>Date of Birth:</strong></td>
+                        <td>{{ application.app_birthday }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Gender:</strong></td>
+                        <td>{{ application.app_gender }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Nationality:</strong></td>
+                        <td>{{ application.app_nation }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Address:</strong></td>
+                        <td>{{ application.app_address }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Student Type:</strong></td>
+                        <td>{{ application.app_type }}</td>
+                    </tr>
+                        <td style="text-align:right"><strong>Programme:</strong></td>
+                        <td>{{ application.app_programme }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Phone Number:</strong></td>
+                        <td>{{ application.app_mobile_number }}</td>
+                    </tr>
+                        <td style="text-align:right"><strong>Email:</strong></td>
+                        <td>{{ application.app_email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
+    <a href="{% url 'Profile:edit_profile' %}" class="btn btn-info">Edit Profile</a>
+    <a href="{% url 'Profile:change_password' %}" class="btn btn-info">Change Password</a>
+</div>
+{% endblock %}

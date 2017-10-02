@@ -8,13 +8,13 @@ from .forms import EnrollForm
 
 # Create your views here.
 
-def home(request):
+def subject(request):
     profile = Profile.objects.get(pk=request.user.id)
     if profile.user_type == 'Admin':
         logout(request)
         return render(request, 'Profile/login.html', {'error_message': 'You are NOT allowed to enter this page.'})
     else:
-        subjects = Enroll.objects.filter(student = request.user)
+        subjects = Enroll.objects.filter(student=request.user)
         return render(request, 'subject/Subject.html',{'subjects': subjects, 'profile': profile, })
 
 def delete(request, enroll_id):
@@ -26,8 +26,7 @@ def delete(request, enroll_id):
     else:
         enroll = Enroll.objects.get(pk=enroll_id)
         enroll.delete()
-        subjects = Enroll.objects.filter(student=request.user)
-        return render(request, 'subject/Subject.html',{'subjects':subjects, 'profile': profile, })
+        return redirect('subject:subject')
 
 def enroll_subject(request):
     profile = Profile.objects.get(pk=request.user.id)
@@ -35,17 +34,14 @@ def enroll_subject(request):
         logout(request)
         return render(request, 'Profile/login.html', {'error_message': 'You are NOT allowed to enter this page.'})
     else:
-        context = {
-            "form": form,
-            'profile': profile,
-        }
         student = request.user
-        form = EnrollForm(request.POST or None,initial={'student':student})
-        form.fields["subject"].queryset = Subject.objects.exclude(enroll__student = student)
+        form = EnrollForm(request.POST or None, initial={'student': student})
+        form.fields["subject"].queryset = Subject.objects.exclude(enroll__student=student)
         if form.is_valid():
             enroll = form.save(commit=False)
             enroll.student = request.user
             enroll.save()
-            return render(request, 'subject/Subject.html', context)
-        return render(request, 'subject/enroll.html', context)
+            return redirect(reverse('subject:subject'))
+        # return render_to_response('subject/enroll.html', context,RequestContext(request))
+        return render(request, 'subject/enroll.html', {'form': form, 'profile':profile})
 
