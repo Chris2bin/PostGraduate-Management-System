@@ -7,4 +7,4 @@ class TransactionForm(forms.ModelForm):
 
     class Meta:
         model = Transaction
-        fields = ['Tran_File', 'Tran_RefNo']
+        fields = ['Tran_File', 'Tran_RefNo', 'Tran_Paid']

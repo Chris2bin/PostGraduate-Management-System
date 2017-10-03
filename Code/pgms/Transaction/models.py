@@ -12,7 +12,13 @@ def validate_file_extension(value):
 
 
 class Transaction(models.Model):
+    Status = (
+        ('Approve', 'Approve'),
+        ('Pending', 'Pending'),
+    )
     Tran_RefNo = models.CharField(max_length=20)
     Tran_File = models.FileField(upload_to='uploaded_files', validators=[validate_file_extension])
     Date_uploaded = models.DateField(auto_now_add=True, editable=False)
+    Tran_Paid = models.DecimalField(max_digits=7, decimal_places=2)
+    Tran_Pend = models.CharField(max_length=7, choices=Status, default="Pending")
     StuID = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
