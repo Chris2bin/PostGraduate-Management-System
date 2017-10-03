@@ -38,28 +38,23 @@
 				</div>
 				<div class="profile-usermenu">
 					<ul class = "nav navbar-fixed-left">
-						<li class = "active">
-							<a href="Home.html">
-							<span class= "glyphicon glyphicon-home"></span>
-							Home</a>
-						</li>
-						<li class = "">
-							<a href="Profile.html">
+						<li {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>
+							<a href="{% url 'Profile:home' %}">
 							<span class= "glyphicon glyphicon-user"></span>
 							Profile</a>
 						</li>
-						<li class = "">
-							<a href="Subject.html">
+						<li {% if request.resolver_match.url_name == 'subject' %}class="active"{% endif %}>
+							<a href="{% url 'subject:subject' %}">
 							<span class= "glyphicon glyphicon-education"></span>
 							Subject</a>
 						</li>
-						<li class = "">
-							<a href="File.html">
+						<li {% if request.resolver_match.url_name == 'file' %}class="active"{% endif %}>
+							<a href="{% url 'file:file' %}">
 							<span class= "glyphicon glyphicon-tasks"></span>
 							File</a>
 						</li>
-						<li class="">
-							<a href="AccountInquriy.html">
+						<li  {% if request.resolver_match.url_name == 'account' %}class="active"{% endif %}>
+							<a href="{% url 'Transaction:account' %}">
 							<span class= "glyphicon glyphicon-stats"></span>
 							Finance</a>
 						</li>
