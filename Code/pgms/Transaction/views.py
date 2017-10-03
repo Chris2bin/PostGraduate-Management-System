@@ -8,6 +8,14 @@ from Profile.models import Profile
 def account(request):
     profile = Profile.objects.get(pk=request.user.id)
     all_account = Transaction.objects.filter(StuID=request.user)
+    fees_paid = 0
+    for transaction in all_account:
+        if transaction.Tran_Pend == "Approve" and transaction.Tran_calc == False:
+            fees_paid += transaction.Tran_Paid
+            transaction.Tran_calc = True
+            transaction.save()
+    profile.user_feesOwed -= fees_paid
+    profile.save()
     return render(request, 'Transaction/account.html', {'all_account': all_account, 'profile': profile})
 
 def upload_file(request):
