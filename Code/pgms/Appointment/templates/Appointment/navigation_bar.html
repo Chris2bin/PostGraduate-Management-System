@@ -22,7 +22,7 @@
         		<span class="icon-bar"></span>
         		<span class="icon-bar"></span>
 			</button>
-			<a class = "navbar-brand active" href="http://127.0.0.1:8000/">BoBoBoyz</a>
+			<a class = "navbar-brand active" href="{% url 'Profile:home' %}">BoBoBoyz</a>
 				<div class="btn-nav pull-right visible-xs">
 		          <a href="#" class="btn btn-notification navbar-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge badge-danger">5</span>
 		          </a>
@@ -108,28 +108,23 @@
 		<!--Item-->
 		<div class= "collapse navbar-collapse" id="topNavBar">
 				<ul class = "nav navbar-nav visible-xs">
-						<li class = "">
-							<a href="Home.html">
-							<span class= "glyphicon glyphicon-home"></span>
-							Home</a>
-						</li>
-						<li class = "active">
-							<a href="Profile.html">
+						<li {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>
+							<a href="{% url 'Profile:home' %}">
 							<span class= "glyphicon glyphicon-user"></span>
 							Profile</a>
 						</li>
-						<li class = "">
-							<a href="Subject.html">
+						<li {% if request.resolver_match.url_name == 'subject' %}class="active"{% endif %}>
+							<a href="{% url 'subject:subject' %}">
 							<span class= "glyphicon glyphicon-education"></span>
 							Subject</a>
 						</li>
-						<li class = "">
-							<a href="File.html">
+						<li {% if request.resolver_match.url_name == 'file' %}class="active"{% endif %}>
+							<a href="{% url 'file:file' %}">
 							<span class= "glyphicon glyphicon-tasks"></span>
 							File</a>
 						</li>
-						<li class="">
-							<a href="AccountInquriy.html">
+						<li  {% if request.resolver_match.url_name == 'account' %}class="active"{% endif %}>
+							<a href="{% url 'Transaction:account' %}">
 							<span class= "glyphicon glyphicon-stats"></span>
 							Finance</a>
 						</li>
