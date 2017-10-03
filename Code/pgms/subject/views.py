@@ -40,8 +40,10 @@ def enroll_subject(request):
         if form.is_valid():
             enroll = form.save(commit=False)
             enroll.student = request.user
+            fee = enroll.subject.fee
+            profile.user_feesOwed += fee
             enroll.save()
-            return redirect(reverse('subject:subject'))
+            return redirect('subject:subject')
         # return render_to_response('subject/enroll.html', context,RequestContext(request))
         return render(request, 'subject/enroll.html', {'form': form, 'profile':profile})
 
