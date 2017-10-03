@@ -25,6 +25,9 @@ def delete(request, enroll_id):
 
     else:
         enroll = Enroll.objects.get(pk=enroll_id)
+        fee = enroll.subject.fee
+        profile.user_feesOwed -= fee
+        profile.save()
         enroll.delete()
         return redirect('subject:subject')
 
@@ -43,7 +46,7 @@ def enroll_subject(request):
             fee = enroll.subject.fee
             profile.user_feesOwed += fee
             enroll.save()
+            profile.save()
             return redirect('subject:subject')
-        # return render_to_response('subject/enroll.html', context,RequestContext(request))
         return render(request, 'subject/enroll.html', {'form': form, 'profile':profile})
 
