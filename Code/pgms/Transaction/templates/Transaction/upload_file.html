@@ -1,0 +1,54 @@
+{% extends 'Profile/side_bar.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="profile-content-head">
+	<div class="form-profile">
+        <!DOCTYPE html>
+
+        <html lang="en-us" >
+            <head>
+                <link rel="stylesheet" type="text/css" href="/static/admin/css/base.css">
+                <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css">
+                <script type="text/javascript" src="/admin/jsi18n/"></script>
+                <script type="text/javascript" src="/static/admin/js/core.js"></script>
+                <script type="text/javascript" src="/static/admin/js/vendor/jquery/jquery.js"></script>
+                <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+                <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+                <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+                <script type="text/javascript" src="/static/admin/js/urlify.js"></script>
+                <script type="text/javascript" src="/static/admin/js/prepopulate.js"></script>
+                <script type="text/javascript" src="/static/admin/js/vendor/xregexp/xregexp.js"></script>
+                <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+                <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+            </head>
+            <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div>
+                    <p>Maxi mum upload file size: 2MB.</p>
+                    <p>File type : pdf, jpg , png</p>
+                </div>
+                <div class="">
+                    <label class="control-label" for="">Receipt</label>
+                    <input type="file" class="form-control" id="" name="Tran_File" required="" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-4 control-label" for=""> Reference Number :</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="Tran_RefNo" id="" placeholder="">
+                        </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-4 control-label" for=""> Payment Made :</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" name="Tran_Paid" id="" placeholder="">
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" name="transaction" value="Transaction">Submit</button>
+                </div>
+            </form>
+
+        </html>
+    </div>
+</div>
+{% endblock %}
