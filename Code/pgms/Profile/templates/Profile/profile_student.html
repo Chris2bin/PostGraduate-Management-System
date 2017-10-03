@@ -41,7 +41,7 @@
             </div>
             <div>
                 {% if target_profile.user_type == 'Supervisor' %}
-                    <button type="button" class="btn btn-info">Make Appointment</button>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#appointmentModal">Make Appointment</button>
                 {% endif %}
             </div>
     	</div>
@@ -147,5 +147,54 @@
         {% endif %}
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="appointmentModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Make Appointment</h4>
+            </div>
+            <div class="modal-body">
+                 <div class="panel-body">
+                    <!-- Form -->
+                    <form id="appointmentForm" method="post" enctype="multipart/form-data" action="">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label  class="col-sm-4 control-label" for=""> Date :</label>
+                            <div class="col-sm-7">
+                                <input type="date" name="date" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-4 control-label" for=""> Time :</label>
+                            <div class="col-sm-7">
+                                <input type="time" name="time" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-4 control-label" for=""> Reason :</label>
+                            <div class="col-sm-7">
+                                <input type="text" name="reason" class="form-control" id="" placeholder="">
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-primary" name="appointment" value="Appointment" form="appointmentForm"></input>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                 </div>
+             </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $('#myModal').modal('show');
+</script>
 
 {% endblock %}

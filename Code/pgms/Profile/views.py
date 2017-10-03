@@ -10,7 +10,8 @@ from .models import Profile
 from Application.models import Application
 from .forms import UserForm, ProfileEditForm, ProgressForm
 from Application.forms import ApplicationForm
-
+from Appointment.forms import AppointmentForm
+from Appointment.models import Appointment
 
 def login_user(request):
     if request.method == "POST":
@@ -115,19 +116,42 @@ def profile(request, username):
             return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, })
 
         if profile.user_type == 'Supervisor':
+            approved_app = Appointment.objects.filter(lecID=profile.user)
             form = ProgressForm(request.POST or None)
             if request.POST:
                 if form.is_valid():
                     progress = form.cleaned_data.get("br_progress")
                     target_profile.br_progress = progress
                     target_profile.save()
-            return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile,})
+            if request.POST.get("reject"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Reject"
+                app.save()
+            elif request.POST.get("accept"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Approve"
+                app.save()
+
+            return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile, 'approved_app': approved_app,})
         elif profile.user_type == 'Student':
             try:
                 application = Application.objects.get(app_student=request.user.id)
             except Application.DoesNotExist:
                 application = None
-            return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, 'application': application, })
+                approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Pending"))
+
+            if request.method == "POST":
+                if request.POST.get("appointment") == "Appointment":
+                    form = AppointmentForm(request.POST or None)
+                    if form.is_valid():
+                        appointment = form.save(commit=False)
+                        appointment.stuID = profile.user
+                        appointment.lecID = target_profile.user
+                        appointment.save()
+                        return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, 'application': application, 'approved_app': approved_app,}, {'success_message': "Application submit sucessfull!"})
+        return render(request, 'Profile/profile_student.html', {'profile': profile, 'target_profile': target_profile, 'application': application, 'approved_app': approved_app,})
 
 
 def change_password(request):
