@@ -30,11 +30,9 @@ def login_user(request):
                         all_applications = Application.objects.filter(app_admin=None).exclude(app_admin=request.user)
                         return render(request,'Application/index.html',{'all_applications':all_applications})
                     else:
-                        return redirect('Profile:home')
+                        return render(request, 'Profile/home.html', {'profile': profile, 'application': application})
                 else:
                     return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
-            else:
-                return render(request, 'Profile/login.html', {'error_message': 'Invalid login'})
 
         elif request.POST.get("application") == "Application":
             if request.POST:
@@ -55,7 +53,7 @@ def login_user(request):
                 app_programme = request.POST['app_programme']
                 if form.is_valid():
                     form.save()
-                    return render(request, 'Profile/login.html', {'success_message':"Application submit successful!"})
+                    return render(request, 'Profile/login.html', {'success_message':"Application submit sucessfull!"})
     return render(request, 'Profile/login.html')
 
 def logout_user(request):
