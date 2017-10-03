@@ -30,9 +30,11 @@ def login_user(request):
                         all_applications = Application.objects.filter(app_admin=None).exclude(app_admin=request.user)
                         return render(request,'Application/index.html',{'all_applications':all_applications})
                     else:
-                        return render(request, 'Profile/home.html', {'profile': profile, 'application': application})
+                        return redirect('Profile:home')
                 else:
                     return render(request, 'Profile/login.html', {'error_message': 'Your account has been disabled'})
+            else:
+                return render(request, 'Profile/login.html', {'error_message': 'Invalid login'})
 
         elif request.POST.get("application") == "Application":
             if request.POST:
@@ -80,7 +82,8 @@ def home(request):
         query = request.GET.get("q")
         if query:
             all_profiles = all_profiles.filter(
-                Q(user__username__contains=query) | Q(user_type__contains=query)
+                Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
+                    user__first_name__contains=query) | Q(user__last_name__contains=query)
             ).distinct()
             return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
         else:
@@ -106,7 +109,8 @@ def profile(request, username):
         query = request.GET.get("q")
         if query:
             all_profiles = all_profiles.filter(
-                Q(user__username__contains=query) | Q(user_type__contains=query)
+                Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
+                    user__first_name__contains=query) | Q(user__last_name__contains=query)
             ).distinct()
             return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, })
 
