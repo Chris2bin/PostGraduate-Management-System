@@ -1,33 +1,16 @@
-from django.shortcuts import render, get_object_or_404
-from django.template import loader
+from django.shortcuts import render
+from Profile.models import Profile
 from .models import Appointment
-from .forms import AppointmentForm
+from django.shortcuts import render, redirect
 
 
 def booking(request):
-    all_appointments = Appointment.objects.all()
-    context = {
-        'all_appointments': all_appointments,
-    }
-    return render(request, 'Appointment/bookings.html', context)
-
-
-def make_appointment(request):
-    form = AppointmentForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        appointment = form.save(commit=False)
-        appointment.date = form.cleaned_data.get("date")
-        appointment.time = form.cleaned_data.get("time")
-        appointment.reason = form.cleaned_data.get("reason")
-        appointment.stuID = form.cleaned_data.get("stuID")
-        appointment.lecID = form.cleaned_data.get("lecID")
-        appointment.save()
-        all_appointments = Appointment.objects.all()
-        context = {
-            'all_appointments': all_appointments,
-        }
-        return render(request, 'Appointment/bookings.html', context)
-    context = {
-        "form": form,
-    }
-    return render(request, 'Appointment/form.html', context)
+    if not request.user.is_authenticated():
+        return render(request, 'Profile/login.html')
+    else:
+        profile = Profile.objects.get(pk=request.user.id)
+        if profile.user_type == 'Supervisor':
+            all_appointments = Appointment.objects.filter(lecID=request.user)
+        else:
+            all_appointments = Appointment.objects.filter(stuID=request.user)
+        return render(request, 'Appointment/bookings.html', {'all_appointments': all_appointments, 'profile': profile})

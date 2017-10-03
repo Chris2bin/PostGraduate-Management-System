@@ -13,7 +13,12 @@
                             <th>Date</th>
                             <th>Time</th>
                             <th>Reason</th>
-                            <th>Lec's Name</th>
+                            {% if profile.user_type == 'Supervisor' %}
+                                <th>Stu's Name</th>
+                            {% else %}
+                                <th>Lec's Name</th>
+                            {% endif %}
+
                             <th>Status</th>
                         </tr>
                         {% for appointment in all_appointments %}
@@ -21,15 +26,16 @@
                                 <td>{{ appointment.date }}</td>
                                 <td>{{ appointment.time }}</td>
                                 <td>{{ appointment.reason }}</td>
-                                <td>{{ appointment.lecID }}</td>
+                                {% if profile.user_type == 'Supervisor' %}
+                                    <td>{{ appointment.stuID }}</td>
+                                {% else %}
+                                    <td>{{ appointment.lecID }}</td>
+                                {% endif %}
                                 <td>{{ appointment.status }}</td>
                             </tr>
                         {% endfor %}
                 </table>
-
-
             {% endif %}
-            <button type="button" class = "btn btn-default"><a href="{% url 'Appointment:make_appointment' %}">Add Appointment</a></button>
         </div>
 
         {% if error_message %}
