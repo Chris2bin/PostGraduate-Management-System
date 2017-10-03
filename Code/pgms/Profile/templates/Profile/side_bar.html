@@ -55,8 +55,8 @@
 							<span class= "glyphicon glyphicon-tasks"></span>
 							File</a>
 						</li>
-						<li  {% if request.resolver_match.url_name == 'transaction' %}class="active"{% endif %}>
-							<a href="AccountInquriy.html">
+						<li  {% if request.resolver_match.url_name == 'account' %}class="active"{% endif %}>
+							<a href="{% url 'Transaction:account' %}">
 							<span class= "glyphicon glyphicon-stats"></span>
 							Finance</a>
 						</li>
