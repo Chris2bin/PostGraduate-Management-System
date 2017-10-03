@@ -78,7 +78,7 @@ class Students(models.Model):
     )
     # Attributes
     user_status = models.CharField(choices=STATUS, verbose_name="Academic Status", default='Active', max_length=10)
-    user_feesOwed = models.FloatField(verbose_name="Outstanding Payment", default=0)
+    user_feesOwed = models.DecimalField(verbose_name="Outstanding Payment", max_digits=7,decimal_places=2,default=0)
     stud_type = models.CharField(choices=STUDENT_TYPE, verbose_name="Student Type", blank=True, null=True, max_length=13)
     br_title = models.CharField(max_length=100, verbose_name="Research Title", unique=True, null=True, blank=True)
     br_progress = models.CharField(choices=PROGRESS, verbose_name="Research Progress", default='None', max_length=23)
