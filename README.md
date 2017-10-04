@@ -3,6 +3,9 @@ Software Engineering Fundamental Project for team BoBoBoyz
 
 This is the place for storing reference links for tutorials and in-progress documents. Final output of code and other documents are stored in their respecitve folders.
 
+Demo video:
+- https://youtu.be/3hfYjP0W56I
+
 BoBoBoyz member's info:
 1) Ng Jing Keong (1151100169) - james0523njk@gmail.com
 2) Goh Kun Shun (1151101980) - kunshun225@gmail.com
