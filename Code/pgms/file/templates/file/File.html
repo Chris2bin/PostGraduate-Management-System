@@ -40,7 +40,7 @@
 										<p> {{ obj.uploaded_at }}</p>
 									  </td>
 										<td>
-										<a href = "{% url 'Profile:profile' obj.owner.username %} " > {{ obj.owner.username }}</a>
+										<a href = "{% url 'Profile:profile' obj.owner.username %}" > {{ obj.owner.username }}</a>
 									  </td>
 									  <td>
 										<a target="_blank" href="{{ obj.file_upload.url }}">
