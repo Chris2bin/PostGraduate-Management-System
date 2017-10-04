@@ -22,77 +22,117 @@
         		<span class="icon-bar"></span>
         		<span class="icon-bar"></span>
 			</button>
-			<a class = "navbar-brand active" href="Home.html">BoboBoyz</a>
+			<a class = "navbar-brand active" href="{% url 'Profile:home' %}">BoBoBoyz</a>
 				<div class="btn-nav pull-right visible-xs">
-		          <a href="#" class="btn btn-notification navbar-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge badge-danger">5</span>
+		          <a href="#" class="btn btn-notification navbar-btn dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span><span class="badge badge-danger">{{ approved_app.count }}</span>
 		          </a>
-		          <ul class="dropdown-menu ">
-		            <div class="notify-drop-title">
-		            	<div class="row">
-		                    <!--inside 1-->
-		            		<div class="col-md-6 col-sm-6 col-xs-6">Notification</div>
-		            		<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-dot-circle-o"></i></a></div>
-		            	</div>
-		            </div>
-		            <!-- end notify title -->
-		            <!-- notify content -->
-		            <div class="drop-content">
-		            	<li>
-		            		<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
-		            		<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">James Ng</a><a href="" class="rIcon"><i class=""></i></a>
-		                        <div>
-		                    		<p>Date</p>
-		                            <p>Time</p>
-		                            <p>About</p>
-									{% if profile.user_type == 'Supervisor' %}
-										<button type="button" class="btn btn-danger pull-right">Reject</button>
-										<button type="button" class="btn btn-primary pull-right">Accept</button>
-									(% else %)
-										"Appoint is approve"
-									{% endif %}
-		                        </div>
-		            		</div>
-		            	</li>
-		            </div>
-		            <div class="notify-drop-footer text-center">
-		            	<a href=""><i class="fa fa-eye"></i> See All</a>
-		            </div>
-		          </ul>
+		          <!--<ul class="dropdown-menu ">-->
+		            <!--<div class="notify-drop-title">-->
+		            	<!--<div class="row">-->
+		                    <!--&lt;!&ndash;inside 1&ndash;&gt;-->
+		            		<!--<div class="col-md-6 col-sm-6 col-xs-6">Notification</div>-->
+		            		<!--<div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-dot-circle-o"></i></a></div>-->
+		            	<!--</div>-->
+		            <!--</div>-->
+		            <!--&lt;!&ndash; end notify title &ndash;&gt;-->
+		            <!--&lt;!&ndash; notify content &ndash;&gt;-->
+		            <!--<div class="drop-content">-->
+						<!--{% for appointment in approved_app %}-->
+							<!--{% if profile.user_type == 'Supervisor' %}-->
+								<!--{% if appointment.status == 'Pending' %}-->
+									<!--<li>-->
+										<!--<div class="col-md-3 col-sm-3 col-xs-3">-->
+											<!--<div class="notify-img">-->
+												<!--{% if appointment.stuID.profile.user_photo %}-->
+													<!--<img src="{{ appointment.stuID.profile.user_photo.url }}" class="img-responsive" alt="">-->
+												<!--{% else %}-->
+													<!--<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">-->
+												<!--{% endif %}-->
+											<!--</div>-->
+										<!--</div>-->
+										<!--<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="{% url 'Profile:profile' appointment.stuID.username %}">{{ appointment.stuID }}</a><a href="" class="rIcon"><i class=""></i></a>-->
+											<!--<div>-->
+												<!--<p>Date  : {{ appointment.date }}</p>-->
+												<!--<p>Time  : {{ appointment.time }}</p>-->
+												<!--<p>About : {{ appointment.reason }}</p>-->
+
+													<!--<form id="appointmentForm" method="post" enctype="multipart/form-data" action="">-->
+														<!--{% csrf_token %}-->
+														<!--<input class="hidden" name="appointment_id" value="{{ appointment.id }}">-->
+														<!--<input type="submit" class="btn btn-primary pull-right" name="accept" value="Accept"></input>-->
+														<!--<input type="submit" class="btn btn-danger pull-right" name="reject" value="Reject"></input>-->
+													<!--</form>-->
+												<!--{% endif %}-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</li>-->
+							<!--{% else %}-->
+								<!--{% if appointment.status != 'Pending'%}-->
+									<!--<li>-->
+										<!--<div class="col-md-3 col-sm-3 col-xs-3">-->
+											<!--<div class="notify-img">-->
+												<!--{% if appointment.lecID.profile.user_photo %}-->
+													<!--<img src="{{ appointment.stuID.profile.user_photo.url }}" class="img-responsive" alt="">-->
+												<!--{% else %}-->
+													<!--<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">-->
+												<!--{% endif %}-->
+											<!--</div>-->
+										<!--</div>-->
+										<!--<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="{% url 'Profile:profile' appointment.lecID.username %}">{{ appointment.lecID }}</a><a href="" class="rIcon"><i class=""></i></a>-->
+											<!--<div>-->
+												<!--<p>Date  : {{ appointment.date }}</p>-->
+												<!--<p>Time  : {{ appointment.time }}</p>-->
+												<!--<p>About : {{ appointment.reason }}</p>-->
+												<!--<p>Status : {{ appointment.status }}</p>-->
+												<!--{% if profile.user_type == 'Supervisor' %}-->
+													<!--<form id="appointmentForm" method="post" enctype="multipart/form-data" action="">-->
+														<!--{% csrf_token %}-->
+														<!--<input class="hidden" name="appointment_id" value="{{ appointment.id }}">-->
+														<!--<input type="submit" class="btn btn-primary pull-right" name="accept" value="Accept"></input>-->
+														<!--<input type="submit" class="btn btn-danger pull-right" name="reject" value="Reject"></input>-->
+													<!--</form>-->
+												<!--{% endif %}-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</li>-->
+								<!--{% endif %}-->
+							<!--{% endif %}-->
+						<!--{% endfor %}-->
+		            <!--</div>-->
+		            <!--<div class="notify-drop-footer text-center">-->
+		            	<!--<a href="{% url 'Appointment:booking' %}"><i class="fa fa-eye"></i> See All</a>-->
+		            <!--</div>-->
+		          <!--</ul>-->
 		    </div>
 		</div>
 
 		<!--Item-->
 		<div class= "collapse navbar-collapse" id="topNavBar">
 				<ul class = "nav navbar-nav visible-xs">
-						<li class = "">
-							<a href="Home.html">
-							<span class= "glyphicon glyphicon-home"></span>
-							Home</a>
-						</li>
-						<li class = "active">
-							<a href="Profile.html">
+						<li {% if request.resolver_match.url_name == 'home' %}class="active"{% endif %}>
+							<a href="{% url 'Profile:home' %}">
 							<span class= "glyphicon glyphicon-user"></span>
 							Profile</a>
 						</li>
-						<li class = "">
-							<a href="Subject.html">
+						<li {% if request.resolver_match.url_name == 'subject' %}class="active"{% endif %}>
+							<a href="{% url 'subject:subject' %}">
 							<span class= "glyphicon glyphicon-education"></span>
 							Subject</a>
 						</li>
-						<li class = "">
-							<a href="File.html">
+						<li {% if request.resolver_match.url_name == 'file' %}class="active"{% endif %}>
+							<a href="{% url 'file:file' %}">
 							<span class= "glyphicon glyphicon-tasks"></span>
 							File</a>
 						</li>
-						<li class="">
-							<a href="AccountInquriy.html">
+						<li {% if request.resolver_match.url_name == 'account' %}class="active"{% endif %}>
+							<a href="{% url 'Transaction:account' %}">
 							<span class= "glyphicon glyphicon-stats"></span>
 							Finance</a>
 						</li>
 				</ul>
 			    <ul class="nav navbar-nav navbar-right">
 		         <li class="dropdown hidden-xs">
-		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span>Notification <span class="badge badge-danger">5</span>
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class= "glyphicon glyphicon-bell" aria-hidden="true"></span> Notification <span class="badge badge-danger">{{ approved_app.count }}</span>
 		          </a>
 		          <ul class="dropdown-menu ">
 		            <div class="notify-drop-title">
@@ -106,26 +146,65 @@
 		            <!-- notify content -->
 		            <div class="drop-content">
 						{% for appointment in approved_app %}
-							{% if appointment.status == 'Pending' %}
-								<li>
-									<div class="col-md-3 col-sm-3 col-xs-3"><div class="notify-img"><img src="keke.jpg" alt=""></div></div>
-									<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="">{{ appointment.lecID }}</a><a href="" class="rIcon"><i class=""></i></a>
-										<div>
-											<p>Date  : {{ appointment.date }}</p>
-											<p>Time  : {{ appointment.time }}</p>
-											<p>About : {{ appointment.reason }}</p>
-											<p>Status : {{ appointment.status }}</p>
-											{% if profile.user_type == 'Supervisor' %}
-												<form id="appointmentForm" method="post" enctype="multipart/form-data" action="">
-													{% csrf_token %}
-													<input class="hidden" name="appointment_id" value="{{ appointment.id }}">
-													<input type="submit" class="btn btn-primary pull-right" name="accept" value="Accept"></input>
-													<input type="submit" class="btn btn-danger pull-right" name="reject" value="Reject"></input>
-												</form>
-											{% endif %}
+							{% if profile.user_type == 'Supervisor' %}
+								{% if appointment.status == 'Pending' %}
+									<li>
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="notify-img">
+												{% if appointment.stuID.profile.user_photo %}
+													<img src="{{ appointment.stuID.profile.user_photo.url }}" class="img-responsive" alt="">
+												{% else %}
+													<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+												{% endif %}
+											</div>
 										</div>
-									</div>
-								</li>
+										<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="{% url 'Profile:profile' appointment.stuID.username %}">{{ appointment.stuID }}</a><a href="" class="rIcon"><i class=""></i></a>
+											<div>
+												<p>Date  : {{ appointment.date }}</p>
+												<p>Time  : {{ appointment.time }}</p>
+												<p>About : {{ appointment.reason }}</p>
+
+													<form id="appointmentForm" method="post" enctype="multipart/form-data" action="">
+														{% csrf_token %}
+														<input class="hidden" name="appointment_id" value="{{ appointment.id }}">
+														<input type="submit" class="btn btn-primary pull-right" name="accept" value="Accept"></input>
+														<input type="submit" class="btn btn-danger pull-right" name="reject" value="Reject"></input>
+													</form>
+
+											</div>
+										</div>
+									</li>
+						          {% endif %}
+							{% else %}
+								{% if appointment.status != 'Pending'%}
+									<li>
+										<div class="col-md-3 col-sm-3 col-xs-3">
+											<div class="notify-img">
+												{% if appointment.lecID.profile.user_photo %}
+													<img src="{{ appointment.stuID.profile.user_photo.url }}" class="img-responsive" alt="">
+												{% else %}
+													<img src="{% static 'Profile/image/default.png' %}" class="img-responsive" alt="">
+												{% endif %}
+											</div>
+										</div>
+										<div class="col-md-9 col-sm-9 col-xs-9 pd-l0"><a href="{% url 'Profile:profile' appointment.lecID.username %}">{{ appointment.lecID }}</a><a href="" class="rIcon"><i class=""></i></a>
+											<div>
+												<p>Date  : {{ appointment.date }}</p>
+												<p>Time  : {{ appointment.time }}</p>
+												<p>About : {{ appointment.reason }}</p>
+												<p>Status : {{ appointment.status }}</p>
+												{% if profile.user_type == 'Supervisor' %}
+													<form id="appointmentForm" method="post" enctype="multipart/form-data" action="">
+														{% csrf_token %}
+														<input class="hidden" name="appointment_id" value="{{ appointment.id }}">
+														<input type="submit" class="btn btn-primary pull-right" name="accept" value="Accept"></input>
+														<input type="submit" class="btn btn-danger pull-right" name="reject" value="Reject"></input>
+													</form>
+											</div>
+										</div>
+									</li>
+									{% endif %}
+								{% endif %}
 							{% endif %}
 						{% endfor %}
 		            </div>
@@ -137,7 +216,7 @@
 
 				<li class="">
 						<a href="{% url 'Profile:logout_user' %}" >
-							<span class= "glyphicon glyphicon-off" aria-hidden="true"></span>Logout
+							<span class= "glyphicon glyphicon-off" aria-hidden="true"></span> Logout
 						</a>
 				</li>
 			</ul>

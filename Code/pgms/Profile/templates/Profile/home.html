@@ -53,6 +53,21 @@
                 </tbody>
             </table>
         </div>
+    {% else %}
+        <div class="profile-userpic">
+            <table class="table table-user-information table-responsive">
+                <tbody>
+                    <tr>
+                        <td style="text-align:right"><strong>Area:</strong></td>
+                        <td>{{ profile.user_area.a_name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right"><strong>Field:</strong></td>
+                        <td>{{ profile.user_area.a_field.f_name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     {% endif %}
     <a href="{% url 'Profile:edit_profile' %}" class="btn btn-info">Edit Profile</a>
     <a href="{% url 'Profile:change_password' %}" class="btn btn-info">Change Password</a>

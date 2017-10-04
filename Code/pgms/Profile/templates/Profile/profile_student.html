@@ -70,7 +70,7 @@
         {% if target_profile.stud_type == 'By Research' %}
             {% if target_profile.br_progress == 'None' %}
                 <ol class="my_progress my_progress--medium">
-                    <li class="is-active" data-step="1">
+                    <li data-step="1">
                         Proposal Defense
                     </li>
                     <li data-step="2">
@@ -85,10 +85,10 @@
                 </ol>
             {% elif target_profile.br_progress == 'Proposal Defense' %}
                 <ol class="my_progress my_progress--medium">
-                    <li class="is-complete" data-step="1">
+                    <li class="is-active" data-step="1">
                         Proposal Defense
                     </li>
-                    <li class="is-active" data-step="2">
+                    <li data-step="2">
                         Work Completion Seminar
                     </li>
                     <li data-step="3">
@@ -103,6 +103,21 @@
                     <li class="is-complete" data-step="1">
                         Proposal Defense
                     </li>
+                    <li class="is-active" data-step="2">
+                        Work Completion Seminar
+                    </li>
+                    <li data-step="3">
+                        Thesis Examination
+                    </li>
+                    <li data-step="4" class="progress__last">
+                        Viva Voce
+                    </li>
+                </ol>
+            {% elif target_profile.br_progress == 'Thesis Examination' %}
+                <ol class="my_progress my_progress--medium">
+                    <li class="is-complete" data-step="1">
+                        Proposal Defense
+                    </li>
                     <li class="is-complete" data-step="2">
                         Work Completion Seminar
                     </li>
@@ -113,7 +128,7 @@
                         Viva Voce
                     </li>
                 </ol>
-            {% elif target_profile.br_progress == 'Thesis Examination' %}
+            {% elif target_profile.br_progress == 'Viva Voce' %}
                 <ol class="my_progress my_progress--medium">
                     <li class="is-complete" data-step="1">
                         Proposal Defense

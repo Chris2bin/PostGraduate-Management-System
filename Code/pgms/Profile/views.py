@@ -8,10 +8,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.db.models import Q
 from .models import Profile
 from Application.models import Application
-from .forms import UserForm, ProfileEditForm, ProgressForm
+from .forms import UserForm, ProfileEditForm, ProgressForm, ProfileEditFormResearch
 from Application.forms import ApplicationForm
 from Appointment.forms import AppointmentForm
 from Appointment.models import Appointment
+from Application.models import Application
 
 def login_user(request):
     if request.method == "POST":
@@ -72,11 +73,73 @@ def home(request):
         return render(request, 'Profile/login.html')
     else:
         profile = Profile.objects.get(pk=request.user.id)
+
+        # Notification bar stuff
+        if profile.user_type == 'Supervisor':
+            approved_app = Appointment.objects.filter(lecID=profile.user)
+            approved_app = approved_app.filter(status="Pending")
+            form = ProgressForm(request.POST or None)
+            if request.POST:
+                if form.is_valid():
+                    progress = form.cleaned_data.get("br_progress")
+                    target_profile.br_progress = progress
+                    target_profile.save()
+            if request.POST.get("reject"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Reject"
+                app.save()
+            elif request.POST.get("accept"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Approve"
+                app.save()
+
+            else:
+                # Search bar stuff
+                all_profiles = Profile.objects.all().filter(
+                    Q(user_type="Supervisor") | Q(user_type="Student")
+                ).distinct()
+                query = request.GET.get("q")
+                if query:
+                    all_profiles = all_profiles.filter(
+                        Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
+                            user__first_name__contains=query) | Q(user__last_name__contains=query)
+                    ).distinct()
+                    return render(request, 'Profile/search.html',
+                                  {'all_profiles': all_profiles, 'profile': profile, })
+
+            return render(request, 'Profile/home.html',
+                          {'form': form, 'profile': profile, 'approved_app': approved_app, })
+        elif profile.user_type == 'Student':
+            try:
+                application = Application.objects.get(app_student=request.user.id)
+            except Application.DoesNotExist:
+                application = None
+            approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Approve") | Q(status="Reject"))
+            form = ProgressForm(request.POST or None)
+            if request.POST:
+                if form.is_valid():
+                    progress = form.cleaned_data.get("br_progress")
+                    target_profile.br_progress = progress
+                    target_profile.save()
+            if request.POST.get("reject"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Reject"
+                app.save()
+            elif request.POST.get("accept"):
+                appointmentID = request.POST.get('appointment_id', False)
+                app = Appointment.objects.get(pk=appointmentID)
+                app.status = "Approve"
+                app.save()
+
         try:
             application = Application.objects.get(app_student=request.user)
         except Application.DoesNotExist:
             application = None
-        # Filter away admin profile
+
+        # Search bar stuff
         all_profiles = Profile.objects.all().filter(
                 Q(user_type="Supervisor") | Q(user_type="Student")
             ).distinct()
@@ -86,9 +149,10 @@ def home(request):
                 Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
                     user__first_name__contains=query) | Q(user__last_name__contains=query)
             ).distinct()
-            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
-        else:
-            return render(request, 'Profile/home.html', {'profile': profile, 'application': application, })
+            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, 'application': application, 'approved_app': approved_app, })
+
+        profile = Profile.objects.get(pk=request.user.id)
+        return render(request, 'Profile/home.html', {'profile': profile, 'application': application, 'approved_app': approved_app, })
 
 def search(request):
     if not request.user.is_authenticated():
@@ -102,22 +166,41 @@ def profile(request, username):
     else:
         profile = Profile.objects.get(pk=request.user.id)
         target_profile = Profile.objects.get(user__username=username)
-        # Filter away admin profile
+        try:
+            application = Application.objects.get(app_student=request.user.id)
+        except Application.DoesNotExist:
+            application = None
+
+        # Search bar stuff
         all_profiles = Profile.objects.all().filter(
-                Q(user_type="Supervisor") | Q(user_type="Student")
-            ).distinct()
-        # Search
+            Q(user_type="Supervisor") | Q(user_type="Student")
+        ).distinct()
         query = request.GET.get("q")
         if query:
             all_profiles = all_profiles.filter(
                 Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
                     user__first_name__contains=query) | Q(user__last_name__contains=query)
             ).distinct()
-            return render(request, 'Profile/search.html', {'all_profiles': all_profiles, 'profile': profile, })
+            return render(request, 'Profile/search.html',
+                          {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
+
+
+        # Notification bar stuff
+        if profile.user_type == 'Supervisor':
+            approved_app = Appointment.objects.filter(lecID=profile.user)
+        else:
+            approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Pending"))
+
 
         if profile.user_type == 'Supervisor':
             approved_app = Appointment.objects.filter(lecID=profile.user)
             form = ProgressForm(request.POST or None)
+            try:
+                application = Application.objects.get(app_student=request.user.id)
+            except Application.DoesNotExist:
+                application = None
+                approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Pending"))
+
             if request.POST:
                 if form.is_valid():
                     progress = form.cleaned_data.get("br_progress")
@@ -136,12 +219,6 @@ def profile(request, username):
 
             return render(request, 'Profile/profile_supervisor.html', {'form': form, 'profile': profile, 'target_profile': target_profile, 'approved_app': approved_app,})
         elif profile.user_type == 'Student':
-            try:
-                application = Application.objects.get(app_student=request.user.id)
-            except Application.DoesNotExist:
-                application = None
-                approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Pending"))
-
             if request.method == "POST":
                 if request.POST.get("appointment") == "Appointment":
                     form = AppointmentForm(request.POST or None)
@@ -156,6 +233,50 @@ def profile(request, username):
 
 def change_password(request):
     profile = Profile.objects.get(pk=request.user.id)
+
+    # Search bar stuff
+    all_profiles = Profile.objects.all().filter(
+        Q(user_type="Supervisor") | Q(user_type="Student")
+    ).distinct()
+    query = request.GET.get("q")
+    if query:
+        all_profiles = all_profiles.filter(
+            Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
+                user__first_name__contains=query) | Q(user__last_name__contains=query)
+        ).distinct()
+        return render(request, 'Profile/search.html',
+                      {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
+
+    # Notification bar stuff
+    if profile.user_type == 'Supervisor':
+        approved_app = Appointment.objects.filter(lecID=profile.user)
+        form = ProgressForm(request.POST or None)
+        if request.POST:
+            if form.is_valid():
+                progress = form.cleaned_data.get("br_progress")
+                target_profile.br_progress = progress
+                target_profile.save()
+        if request.POST.get("reject"):
+            appointmentID = request.POST.get('appointment_id', False)
+            app = Appointment.objects.get(pk=appointmentID)
+            app.status = "Reject"
+            app.save()
+        elif request.POST.get("accept"):
+            appointmentID = request.POST.get('appointment_id', False)
+            app = Appointment.objects.get(pk=appointmentID)
+            app.status = "Approve"
+            app.save()
+
+        return render(request, 'Profile/profile_supervisor.html',
+                      {'form': form, 'profile': profile, 'target_profile': target_profile,
+                       'approved_app': approved_app, })
+    elif profile.user_type == 'Student':
+        try:
+            application = Application.objects.get(app_student=request.user.id)
+        except Application.DoesNotExist:
+            application = None
+            approved_app = Appointment.objects.filter(Q(status="Approve") | Q(status="Reject"))
+
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -177,6 +298,51 @@ def edit_profile(request):
         if profile_edit_form.is_valid():
             profile_edit_form.save_all_fields_from_request(request=request)
             profile = Profile.objects.get(pk=request.user.id)
-            return render(request, 'Profile/home.html', {'profile': profile,})
+            return render(request, 'Profile/home.html', {'profile': profile, })
+
     profile = Profile.objects.get(pk=request.user.id)
+
+    # Search bar stuff
+    all_profiles = Profile.objects.all().filter(
+        Q(user_type="Supervisor") | Q(user_type="Student")
+    ).distinct()
+    query = request.GET.get("q")
+    if query:
+        all_profiles = all_profiles.filter(
+            Q(user__username__contains=query) | Q(user_type__contains=query) | Q(
+                user__first_name__contains=query) | Q(user__last_name__contains=query)
+        ).distinct()
+        return render(request, 'Profile/search.html',
+                      {'all_profiles': all_profiles, 'profile': profile, 'application': application, })
+
+    # Notification bar stuff
+    if profile.user_type == 'Supervisor':
+        approved_app = Appointment.objects.filter(lecID=profile.user)
+        form = ProgressForm(request.POST or None)
+        if request.POST:
+            if form.is_valid():
+                progress = form.cleaned_data.get("br_progress")
+                target_profile.br_progress = progress
+                target_profile.save()
+        if request.POST.get("reject"):
+            appointmentID = request.POST.get('appointment_id', False)
+            app = Appointment.objects.get(pk=appointmentID)
+            app.status = "Reject"
+            app.save()
+        elif request.POST.get("accept"):
+            appointmentID = request.POST.get('appointment_id', False)
+            app = Appointment.objects.get(pk=appointmentID)
+            app.status = "Approve"
+            app.save()
+
+        return render(request, 'Profile/profile_supervisor.html',
+                      {'form': form, 'profile': profile, 'target_profile': target_profile,
+                       'approved_app': approved_app, })
+    elif profile.user_type == 'Student':
+        try:
+            application = Application.objects.get(app_student=request.user.id)
+        except Application.DoesNotExist:
+            application = None
+            approved_app = Appointment.objects.filter(Q(stuID=profile.user) | Q(status="Pending"))
+
     return render(request, 'Profile/edit_profile.html', {'form': profile_edit_form, 'profile': profile,})
