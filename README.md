@@ -5,6 +5,7 @@ This is the place for storing reference links for tutorials and in-progress docu
 
 Demo video:
 - https://youtu.be/3hfYjP0W56I
+- NOTE: The dropdown and the file selecting window is somehow not captured in the video. The video is privated and can only be viewed if you have the link. 
 
 BoBoBoyz member's info:
 1) Ng Jing Keong (1151100169) - james0523njk@gmail.com
